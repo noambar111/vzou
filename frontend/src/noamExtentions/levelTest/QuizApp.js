@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+
+import { useAppSelector } from "../../store/hooks"; // Your Redux hook
+import { selectAuthentication } from "../../store/reducers/auth-reducer";
+
 import './QuizApp.css'; // Custom scoped CSS
 import questions from './questions.json'; // Questions JSON file
 import axios from 'axios';
@@ -7,6 +11,7 @@ const QuizApp = () => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // Index of current question
     const [results, setResults] = useState({}); // Object to store answers by question ID
     const [isComplete, setIsComplete] = useState(false); // Completion status
+    const authSlice = useAppSelector(selectAuthentication);
 
     const totalQuestions = questions.length;
 
@@ -59,26 +64,29 @@ const QuizApp = () => {
     
 
     const handleSubmit = () => {
-        // Prepare the payload for submission
-        console.log(results);
+        const userId = authSlice.user?.id; // Get user ID from authentication state
+        console.log("handleSubmit  " + userId)
+    
         const payload = Object.keys(results).map((questionId) => ({
             questionId: parseInt(questionId, 10),
-            memory: results[questionId].memory,
-            application: results[questionId].application
+            memoryScore: results[questionId].memory,
+            applicationScore: results[questionId].application,
+            userId, // Use dynamic user ID here
         }));
-        console.log(payload);
 
+        console.log(payload)
+
+    
         axios
-            .post('http://localhost:3000/quiz/results', { results: payload })
+            .post("http://localhost:3001/api/test-results/results", { results: payload })
             .then((res) => {
-                alert('Results submitted successfully!');
-                console.log(res.data);
+                alert("Results submitted successfully!");
             })
             .catch((err) => {
-                console.error('Error submitting results:', err);
-                alert('Failed to submit results.');
+                console.error("Error submitting results:", err);
             });
     };
+    
 
     if (isComplete) {
         return (

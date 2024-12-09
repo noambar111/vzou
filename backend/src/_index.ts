@@ -8,6 +8,7 @@ import UserRouter from './routes/UserRoutes.js'
 import LecturerRouter from './routes/LecturerRoutes.js'
 import UserInputRouter from './routes/UserInputRoutes.js'
 import ErrorHandlingMiddleware from './middleware/ErrorHandlingMiddleware.js'
+import testResultsRoutes from './routes/TestResultsRoutes.js';
 import fs from 'fs'
 import https from 'https'
 dotenv.config()
@@ -23,6 +24,7 @@ app.use(express.json())
 app.use('/api/user', UserRouter)
 app.use('/api/lecturer', LecturerRouter)
 app.use('/api/input', UserInputRouter)
+app.use('/api/test-results', testResultsRoutes);
 const server = https.createServer(credentials, app)
 //Error Handler - Last middleware
 app.use(ErrorHandlingMiddleware)
