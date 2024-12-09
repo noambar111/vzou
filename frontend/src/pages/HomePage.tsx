@@ -3,21 +3,27 @@ import HomeGallery from "../components/Home/HomeGallery";
 import FloatUpContainer from "../components/UI/FloatUpContainer";
 import CustomizedPage from "../noamExtentions/CustomizedPage";
 import { useHomePageContext } from "../noamExtentions/HomePageContext";
-
-
-
-
+import { useAppSelector } from "../store/hooks"; // Assuming you're using Redux
+import { selectAuthentication } from "../store/reducers/auth-reducer"; // Select authentication slice
+import { useHistory } from "react-router-dom"; // For redirection
 
 function HomePage() {
   const { showHomeGallery, setShowHomeGallery } = useHomePageContext();
+  const authSlice = useAppSelector(selectAuthentication);
+  const history = useHistory();
 
   useEffect(() => {
     // Reset state when the component mounts
     setShowHomeGallery(null);
-  }, []);
+  }, [setShowHomeGallery]);
 
   const handleSelection = (isHomeGallery: boolean) => {
-    setShowHomeGallery(isHomeGallery); // Set the choice and hide buttons
+    if (!isHomeGallery && !authSlice.isLoggedIn) {
+      // Redirect to login if user is not logged in and selects Custom Web
+      history.push("/login");
+    } else {
+      setShowHomeGallery(isHomeGallery); // Set the choice
+    }
   };
 
   return (
@@ -58,8 +64,12 @@ function HomePage() {
       <FloatUpContainer>
         {showHomeGallery === null ? null : showHomeGallery ? (
           <HomeGallery />
-        ) : (
+        ) : authSlice.isLoggedIn ? (
           <CustomizedPage />
+        ) : (
+          <div style={{ color: "red", fontWeight: "bold" }}>
+            Redirecting to login...
+          </div>
         )}
       </FloatUpContainer>
     </div>
