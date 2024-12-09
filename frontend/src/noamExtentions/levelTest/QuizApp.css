@@ -1,0 +1,76 @@
+/* General styling */
+.quiz-app {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Adjusted from center to move higher */
+    padding-top: 50px; /* Add padding to adjust height */
+    height: 100vh;
+}
+
+.quiz-app .quiz-container {
+    background: #ffffff;
+    padding: 20px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    text-align: center;
+}
+
+.quiz-app .quiz-title {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #333333;
+}
+
+.quiz-app .question-card {
+    margin-bottom: 20px;
+}
+
+.quiz-app .question-text {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #444444;
+}
+
+.quiz-app .options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.quiz-app .option {
+    font-size: 1em;
+    padding: 10px;
+    background: #f9f9f9;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.quiz-app .option input[type="radio"] {
+    margin-right: 10px;
+}
+
+.quiz-app .option:hover {
+    background: #eaeaea;
+}
+
+.quiz-app .submit-button {
+    background-color: #4caf50;
+    color: white;
+    font-size: 1em;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.quiz-app .submit-button:hover {
+    background-color: #45a049;
+}

@@ -1,11 +1,12 @@
 import FloatUpContainer from "../components/UI/FloatUpContainer";
+import QuizApp from "./levelTest/QuizApp";
 
 function CustomizedPage() {
 
   return (
     <div>
       <FloatUpContainer>
-        <h2>test</h2>
+        <QuizApp />
       </FloatUpContainer>
     </div>
   );
