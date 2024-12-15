@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt'
-import { NextFunction, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import pkg from 'jsonwebtoken'
 import ApiError from '../error/ApiError.js'
 import User from '../models/User.js'
@@ -15,6 +15,9 @@ const { sign } = pkg
 /* GenerateJwt and generateConfirmMailToken both use jason web tokens to encrypt required data,
 it is recommended anyone who wishes to change anything on this page have a fundamental understanding of
 JWT structure, and consult the other processes that use these functions. */
+
+
+
 
 export const generateJwt = (user: IUser) => {
   return sign(
@@ -48,6 +51,85 @@ export const generateConfirmMailToken = (email: string) => {
  * TODO: document
  */
 class UserController {
+
+  async updateQuizStatus(req: Request, res: Response) {
+    try {
+      const { userId } = req.params;
+      const { hasCompletedQuiz } = req.body;
+  
+      // Update the user's quiz status
+      const user = await User.findByPk(userId);
+      if (!user) {
+        return res.status(404).json({ message: 'User not found.' });
+      }
+  
+      user.hasCompletedQuiz = hasCompletedQuiz; // Update field
+      await user.save(); // Save changes to the database
+  
+      // Reload to ensure the latest value is fetched
+      await user.reload();
+  
+      return res.status(200).json({
+        message: "Quiz status updated successfully.",
+        hasCompletedQuiz: user.hasCompletedQuiz,
+      });
+    } catch (error) {
+      console.error("Error updating quiz status:", error);
+      return res.status(500).json({ message: "Failed to update quiz status." });
+    }
+  }
+  
+
+  async getQuizStatus(req: Request, res: Response) {
+    try {
+      console.log("getQuizStatusgetQuizStatus")
+
+      const { userId } = req.params;
+  
+      const user = await User.findByPk(userId);
+      if (!user) {
+        console.log("getQuizStatus not user")
+
+        return res.status(404).json({ message: 'User not found.' });
+      }
+
+      console.log("update quizhasbeen submitted" + user.hasCompletedQuiz)
+  
+      res.setHeader('Cache-Control', 'no-store'); // Prevent caching
+  
+      return res.status(200).json({
+        hasCompletedQuiz: user.hasCompletedQuiz,
+        learningPath: user.learningPath || null,
+      });
+    } catch (error) {
+      console.error('Error fetching quiz status:', error);
+      return res.status(500).json({ message: 'Failed to fetch quiz status.' });
+    }
+  }
+  
+
+  async getLearningPath(req: Request, res: Response) {
+    try {
+      const { userId } = req.params;
+
+      const user = await User.findByPk(userId, {
+        attributes: ['learningPath', 'hasCompletedQuiz'],
+      });
+
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+
+      res.status(200).json({
+        message: 'Learning path fetched successfully',
+        learningPath: user.learningPath,
+        hasCompletedQuiz: user.hasCompletedQuiz,
+      });
+    } catch (error) {
+      console.error('Error fetching learning path:', error);
+      res.status(500).json({ message: 'Failed to fetch learning path' });
+    }
+  }
 
 
   async registration(req: TypedRequestBody<IUserRegister>, res: Response, next: NextFunction) {

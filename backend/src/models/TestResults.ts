@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import { sequelize } from '../db.js'
+import { sequelize } from '../db.js';
 
 class TestResult extends Model {
   public id!: number;
@@ -22,7 +22,7 @@ TestResult.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Users', // Link to Users table
+        model: 'Users',
         key: 'id',
       },
     },
@@ -33,12 +33,12 @@ TestResult.init(
     memoryScore: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: 0, // 0 = Incorrect
+      defaultValue: 0,
     },
     applicationScore: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: 0, // 0 = Incorrect
+      defaultValue: 0,
     },
   },
   {
