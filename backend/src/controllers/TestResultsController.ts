@@ -2,9 +2,12 @@ import { Request, Response } from 'express';
 import TestResult from './../models/TestResults.js';
 import User from './../models/User.js';
 
+
+
 export const saveTestResult = async (req: Request, res: Response) => {
   try {
-    console.log("Received data:", JSON.stringify(req.body, null, 2));
+    console.log("Received data:", JSON.stringify(req.body, null, 2)); // Debugging log
+
     const { results } = req.body;
 
     if (!Array.isArray(results)) {
@@ -13,12 +16,10 @@ export const saveTestResult = async (req: Request, res: Response) => {
     }
 
     const userId = results[0]?.userId;
-
     if (!userId) {
       console.error('Missing userId in results.');
       return res.status(400).json({ message: 'Missing userId in results.' });
     }
-
     const createdResults = await Promise.all(
       results.map(({ userId, questionId, memoryScore, applicationScore }) => {
         return TestResult.create({
@@ -31,25 +32,34 @@ export const saveTestResult = async (req: Request, res: Response) => {
     );
 
     console.log("Test results saved successfully.");
-
     const learningPath: Record<string, string> = {};
     results.forEach(({ questionId, memoryScore, applicationScore }) => {
       learningPath[`Question-${questionId}`] =
         memoryScore === 0 || applicationScore === 0 ? 'Needs Improvement' : 'Completed';
     });
 
+    console.log("Generated learning path:", JSON.stringify(learningPath, null, 2)); // Debugging log
+
+    // חיפוש המשתמש במסד הנתונים
     const user = await User.findByPk(userId);
 
     if (user) {
-      user.learningPath = learningPath; 
+      user.learningPath = JSON.stringify(learningPath); // הפיכת learningPath ל-JSON string
       user.hasCompletedQuiz = true;
-      await user.save(); 
-      console.log("Learning path and quiz status updated for user:", userId);
+
+      console.log("Before saving user:", user.toJSON()); // Debugging log
+      await user.save();
+      console.log("User saved successfully.");
+
+      // טעינה מחדש של הנתונים מה-DB
+      await user.reload();
+      console.log("After reload:", user.toJSON()); // Debugging log
     } else {
       console.error('User not found while updating learning path.');
       return res.status(404).json({ message: 'User not found.' });
     }
 
+    // החזרת תגובה ללקוח
     res.status(201).json({
       message: 'Test results and learning path saved successfully',
       data: createdResults,
@@ -60,6 +70,7 @@ export const saveTestResult = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Failed to save test results or update learning path' });
   }
 };
+
 
 export const getTestResultsByUser = async (req: Request, res: Response) => {
   try {
@@ -75,16 +86,22 @@ export const getTestResultsByUser = async (req: Request, res: Response) => {
 
 export const getLearningPathByUser = async (req: Request, res: Response) => {
   try {
+    console.log("getLearningPathByUser");
     const { userId } = req.params;
 
     // Fetch user by ID
     const user = await User.findByPk(userId, {
       attributes: ['learningPath', 'hasCompletedQuiz'],
+      raw: true
     });
 
     if (!user) {
+      console.log("NOT USER - getLearningPathByUser");
       console.error('User not found.');
       return res.status(404).json({ message: 'User not found.' });
+    }
+    else{
+      console.log("i am " + user.learningPath);
     }
 
     res.status(200).json({
@@ -99,14 +116,20 @@ export const getLearningPathByUser = async (req: Request, res: Response) => {
 };
 
 // Get quiz status
-export const getQuizStatus = async (req: Request, res: Response) => {
+export const getQuizStatuss = async (req: Request, res: Response) => {
   try {
+    console.log("Fetching quiz status for user ID:" );
+
+    console.log("Get quiz status test result")
     const { userId } = req.params;
+    console.log("Fetching quiz status for user ID:  " +   userId );
 
     const user = await User.findByPk(userId, {
       attributes: ['hasCompletedQuiz'],
-    });
+      raw: true
+  });
 
+    console.log(user);
     if (!user) {
       console.error('User not found.');
       return res.status(404).json({ message: 'User not found.' });

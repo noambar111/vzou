@@ -26,7 +26,7 @@ function CustomizedPage() {
   
       try {
         const response = await axios.get(
-          `http://localhost:3001/api/user/quiz-status/${userId}`
+          `http://localhost:3001/api/test-results/quiz-status/${userId}`
         );
         console.log("aaaaAPI Response:", response.data); // Debug log
         setQuizCompleted(response.data.hasCompletedQuiz);
