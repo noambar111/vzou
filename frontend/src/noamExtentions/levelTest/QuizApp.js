@@ -65,27 +65,26 @@ const QuizApp = () => {
 
     const handleSubmit = () => {
         const userId = authSlice.user?.id; // Get user ID from authentication state
-        console.log("handleSubmit  " + userId)
-    
+        console.log("handleSubmit: User ID - " + userId);
+      
         const payload = Object.keys(results).map((questionId) => ({
-            questionId: parseInt(questionId, 10),
-            memoryScore: results[questionId].memory,
-            applicationScore: results[questionId].application,
-            userId, // Use dynamic user ID here
+          questionId: parseInt(questionId, 10),
+          memoryScore: results[questionId].memory,
+          applicationScore: results[questionId].application,
+          userId, // Use dynamic user ID here
         }));
-
-        console.log(payload)
-
-    
+      
+        console.log("Payload to submit:", payload);
+      
+        // Step 1: Submit the quiz results
         axios
-            .post("http://localhost:3001/api/test-results/results", { results: payload })
-            .then((res) => {
-                alert("Results submitted successfully!");
-            })
-            .catch((err) => {
-                console.error("Error submitting results:", err);
-            });
-    };
+          .post("http://localhost:3001/api/test-results/results", { results: payload })
+          .catch((err) => {
+            console.error("Error during quiz submission or status update:", err);
+            alert("An error occurred. Please try again.");
+          });
+      };
+      
     
 
     if (isComplete) {
