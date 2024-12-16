@@ -31,5 +31,6 @@ export interface IUser extends IUserRegister {
   isEmailConfirmed: boolean
   isEnabled2FA: boolean
   hasCompletedQuiz: boolean; 
-  learningPath: string | null;
+  learningPath:  Record<string, string> | null;
+
 }

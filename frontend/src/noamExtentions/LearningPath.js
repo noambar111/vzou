@@ -5,21 +5,22 @@ import { selectAuthentication } from "../store/reducers/auth-reducer";
 
 // Predefined topics mapping by question ID
 const questionTopics = [
-    "Insertion Sort",
-    "Counting Sort",
-    "Quick Sort",
-    "Stack",
-    "Queue",
-    "Binary Search Tree (BST)",
-    "DFS",
-    "BFS",
-    "Dijkstra"
+    { name: "Insertion Sort", demoLink: "/DataStructure/BfsPage" },
+    { name: "Counting Sort", demoLink: "/DataStructure/CountingSortPage" },
+    { name: "Quick Sort", demoLink: "/DataStructure/QuickSortPage" },
+    { name: "Stack", demoLink: "/DataStructure/StackPage" },
+    { name: "Queue", demoLink: "/DataStructure/QueuePage" },
+    { name: "Binary Search Tree (BST)", demoLink: "/DataStructure/BSTreePage" },
+    { name: "DFS", demoLink: "/DataStructure/DFSPage" },
+    { name: "BFS", demoLink: "/DataStructure/BfsPage" },
+    { name: "Dijkstra", demoLink: "/DataStructure/DijkstraPage" },
 ];
 
 const LearningPath = () => {
     const [learningPath, setLearningPath] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [completedSteps, setCompletedSteps] = useState([]); // Tracks completed quizzes
     const authSlice = useAppSelector(selectAuthentication);
     const userId = authSlice.user?.id;
 
@@ -30,8 +31,13 @@ const LearningPath = () => {
                 const response = await axios.get(
                     `http://localhost:3001/api/test-results/learning-path/${userId}`
                 );
-                const parsedLearningPath = JSON.parse(response.data.learningPath);
-                setLearningPath(parsedLearningPath);
+                const rawLearningPath = response.data?.learningPath;
+
+                if (!rawLearningPath) {
+                    throw new Error("Learning path data is missing");
+                }
+
+                setLearningPath(rawLearningPath);
             } catch (err) {
                 console.error("Error fetching learning path:", err);
                 setError("Failed to load learning path");
@@ -42,12 +48,24 @@ const LearningPath = () => {
         fetchLearningPath();
     }, [userId]);
 
-    const getColor = (status) => (status === "Completed" ? "#4CAF50" : "#FF0000");
+    const getColor = (status, index) => {
+        if (completedSteps.includes(index)) return "#4CAF50"; // Green if completed
+        if (index === 0 || completedSteps.includes(index - 1)) return "#FF0000"; // Red if active
+        return "#C0C0C0"; // Gray if locked
+    };
+
+    const handleQuizAttempt = (index) => {
+        if (completedSteps.includes(index - 1) || index === 0) {
+            alert(`Starting quiz for ${questionTopics[index].name}`);
+            setCompletedSteps((prev) => [...prev, index]);
+        } else {
+            alert("Complete the previous step first!");
+        }
+    };
 
     if (loading) return <p>Loading learning path...</p>;
     if (error) return <p>{error}</p>;
 
-    // Positions along the path
     const pathPositions = [
         { x: 90, y: 200 },
         { x: 250, y: 150 },
@@ -74,12 +92,18 @@ const LearningPath = () => {
                         fill="transparent"
                         strokeWidth="6"
                         strokeLinecap="round"
+                        cursor="pointer"
+                        onClick={() => {
+                            alert("Click circles to attempt quizzes or paths for demonstrations.");
+                        }}
                     />
 
                     {/* Points and Labels */}
                     {Object.entries(learningPath).map(([key, value], index) => {
                         const { x, y } = pathPositions[index] || { x: 0, y: 0 };
-                        const topic = questionTopics[index] || `Question ${index}`; // Fetch the topic by index
+                        const topic = questionTopics[index]?.name || `Question ${index}`;
+                        const demoLink = questionTopics[index]?.demoLink;
+
                         return (
                             <g key={key}>
                                 {/* Circle */}
@@ -87,19 +111,23 @@ const LearningPath = () => {
                                     cx={x}
                                     cy={y}
                                     r="20"
-                                    fill={getColor(value)}
+                                    fill={getColor(value, index)}
                                     stroke="black"
                                     strokeWidth="2"
+                                    cursor="pointer"
+                                    onClick={() => handleQuizAttempt(index)}
                                 />
                                 {/* Topic Label */}
                                 <text
                                     x={x}
-                                    y={y - 33}
+                                    y={y - 30}
                                     fontSize="14"
                                     fontWeight="bold"
                                     fill="#333"
                                     textAnchor="middle"
                                     fontFamily="Arial, sans-serif"
+                                    cursor="pointer"
+                                    onClick={() => window.open(demoLink, "_blank")}
                                 >
                                     {topic}
                                 </text>
@@ -108,11 +136,11 @@ const LearningPath = () => {
                                     x={x}
                                     y={y + 40}
                                     fontSize="12"
-                                    fill={getColor(value)}
+                                    fill={getColor(value, index)}
                                     textAnchor="middle"
                                     fontFamily="Arial, sans-serif"
                                 >
-                                    {value}
+                                    {completedSteps.includes(index) ? "Completed" : value}
                                 </text>
                             </g>
                         );

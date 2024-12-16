@@ -3,16 +3,16 @@ import TestResult from './../models/TestResults.js';
 import User from './../models/User.js';
 
 
-
 export const saveTestResult = async (req: Request, res: Response) => {
   try {
-    console.log("Received data:", JSON.stringify(req.body, null, 2)); // Debugging log
+    console.log("saveTestResult has been called");
 
     const { results } = req.body;
 
-    if (!Array.isArray(results)) {
-      console.error('Invalid data format. Expected "results" to be an array.');
-      return res.status(400).json({ message: 'Invalid data format. "results" must be an array.' });
+    // Validate results
+    if (!Array.isArray(results) || results.length === 0) {
+      console.error('Invalid data format or empty results array.');
+      return res.status(400).json({ message: 'Results must be a non-empty array.' });
     }
 
     const userId = results[0]?.userId;
@@ -20,6 +20,7 @@ export const saveTestResult = async (req: Request, res: Response) => {
       console.error('Missing userId in results.');
       return res.status(400).json({ message: 'Missing userId in results.' });
     }
+
     const createdResults = await Promise.all(
       results.map(({ userId, questionId, memoryScore, applicationScore }) => {
         return TestResult.create({
@@ -32,34 +33,38 @@ export const saveTestResult = async (req: Request, res: Response) => {
     );
 
     console.log("Test results saved successfully.");
+
+    // Generate learning path
     const learningPath: Record<string, string> = {};
     results.forEach(({ questionId, memoryScore, applicationScore }) => {
       learningPath[`Question-${questionId}`] =
-        memoryScore === 0 || applicationScore === 0 ? 'Needs Improvement' : 'Completed';
+        memoryScore === 0 || applicationScore === 0 ? "Needs Improvement" : "Completed";
     });
-
-    console.log("Generated learning path:", JSON.stringify(learningPath, null, 2)); // Debugging log
-
-    // חיפוש המשתמש במסד הנתונים
+    
+    console.log("Generated learning path:", learningPath); // Debugging log
+    
     const user = await User.findByPk(userId);
-
+    
     if (user) {
-      user.learningPath = JSON.stringify(learningPath); // הפיכת learningPath ל-JSON string
-      user.hasCompletedQuiz = true;
-
-      console.log("Before saving user:", user.toJSON()); // Debugging log
-      await user.save();
-      console.log("User saved successfully.");
-
-      // טעינה מחדש של הנתונים מה-DB
+      if (Object.keys(learningPath).length > 0) {
+        user.learningPath = learningPath; // Save as object directly
+        user.hasCompletedQuiz = true;
+    
+        console.log("Before saving user:", user.toJSON());
+        await user.save();
+        console.log("User saved successfully.");
+      } else {
+        console.warn("Learning path is empty. Skipping user update.");
+      }
+    
       await user.reload();
-      console.log("After reload:", user.toJSON()); // Debugging log
+      console.log("After reload:", user.toJSON());
     } else {
-      console.error('User not found while updating learning path.');
-      return res.status(404).json({ message: 'User not found.' });
+      console.error("User not found while updating learning path.");
+      return res.status(404).json({ message: "User not found." });
     }
+    
 
-    // החזרת תגובה ללקוח
     res.status(201).json({
       message: 'Test results and learning path saved successfully',
       data: createdResults,
@@ -70,6 +75,7 @@ export const saveTestResult = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Failed to save test results or update learning path' });
   }
 };
+
 
 
 export const getTestResultsByUser = async (req: Request, res: Response) => {

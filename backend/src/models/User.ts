@@ -15,7 +15,7 @@ class User extends Model<UserAttributes, IUserRegister> implements UserAttribute
   public password!: string
   public isEnabled2FA!: boolean
   public isEmailConfirmed!: boolean
-  public learningPath: string | null = null;
+  public learningPath!: Record<string, string> | null;
   public hasCompletedQuiz: boolean = false;
 
   // timestamps!
