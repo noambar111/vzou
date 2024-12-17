@@ -1,0 +1,397 @@
+[
+    {
+        "id": 0,
+        "topic": "Selection Sort",
+        "difficulty": "Memory",
+        "question": "What is the primary characteristic of Selection Sort?",
+        "options": ["It repeatedly selects the largest element", "It repeatedly selects the smallest element", "It sorts in reverse order"],
+        "correctAnswer": "It repeatedly selects the smallest element"
+    },
+    {
+        "id": 0,
+        "topic": "Selection Sort",
+        "difficulty": "Application",
+        "question": "Using Selection Sort, after one iteration on [4, 2, 1, 3], what will the array look like?",
+        "options": ["[1, 2, 4, 3]", "[4, 2, 3, 1]", "[2, 4, 1, 3]"],
+        "correctAnswer": "[1, 2, 4, 3]"
+    },
+    {
+        "id": 1,
+        "topic": "Bubble Sort",
+        "difficulty": "Memory",
+        "question": "What does Bubble Sort do in each pass?",
+        "options": ["Finds the minimum element", "Swaps adjacent elements if out of order", "Divides the array in halves"],
+        "correctAnswer": "Swaps adjacent elements if out of order"
+    },
+    {
+        "id": 1,
+        "topic": "Bubble Sort",
+        "difficulty": "Application",
+        "question": "After the first pass of Bubble Sort on [3, 2, 4, 1], what will the array look like?",
+        "options": ["[2, 3, 1, 4]", "[3, 2, 4, 1]", "[2, 3, 4, 1]"],
+        "correctAnswer": "[2, 3, 4, 1]"
+    },
+    {
+        "id": 2,
+        "topic": "Insertion Sort",
+        "difficulty": "Memory",
+        "question": "In Insertion Sort, where is the new element placed in each iteration?",
+        "options": ["At the beginning of the list", "At its correct position in the sorted part", "At the end of the list"],
+        "correctAnswer": "At its correct position in the sorted part"
+    },
+    {
+        "id": 2,
+        "topic": "Insertion Sort",
+        "difficulty": "Application",
+        "question": "Using Insertion Sort on [5, 2, 4], what will the array look like after inserting 2?",
+        "options": ["[2, 5, 4]", "[5, 2, 4]", "[2, 4, 5]"],
+        "correctAnswer": "[2, 5, 4]"
+    },
+    {
+        "id": 3,
+        "topic": "Stack",
+        "difficulty": "Memory",
+        "question": "What is the main principle of a stack?",
+        "options": ["FIFO - First In First Out", "LIFO - Last In First Out", "Random Access"],
+        "correctAnswer": "LIFO - Last In First Out"
+    },
+    {
+        "id": 3,
+        "topic": "Stack",
+        "difficulty": "Application",
+        "question": "Perform push(2), push(3), pop() on an empty stack. What remains in the stack?",
+        "options": ["3", "2", "Empty Stack"],
+        "correctAnswer": "2"
+    },
+    {
+        "id": 4,
+        "topic": "Queue",
+        "difficulty": "Memory",
+        "question": "What is the main principle of a queue?",
+        "options": ["FIFO - First In First Out", "LIFO - Last In First Out", "Random Access"],
+        "correctAnswer": "FIFO - First In First Out"
+    },
+    {
+        "id": 4,
+        "topic": "Queue",
+        "difficulty": "Application",
+        "question": "Perform enqueue(2), enqueue(3), dequeue() on an empty queue. What remains in the queue?",
+        "options": ["3", "2", "Empty Queue"],
+        "correctAnswer": "3"
+    },
+    {
+        "id": 5,
+        "topic": "Linked List",
+        "difficulty": "Memory",
+        "question": "What is a Linked List?",
+        "options": ["A dynamic data structure with nodes linked together", "A fixed-size array", "A binary tree"],
+        "correctAnswer": "A dynamic data structure with nodes linked together"
+    },
+    {
+        "id": 5,
+        "topic": "Linked List",
+        "difficulty": "Application",
+        "question": "Insert 3 at the beginning of the linked list: 5 -> 7 -> NULL. What is the new list?",
+        "options": ["3 -> 5 -> 7 -> NULL", "5 -> 3 -> 7 -> NULL", "5 -> 7 -> 3 -> NULL"],
+        "correctAnswer": "3 -> 5 -> 7 -> NULL"
+    },
+    {
+        "id": 6,
+        "topic": "Counting Sort",
+        "difficulty": "Memory",
+        "question": "What is a unique feature of Counting Sort?",
+        "options": ["It uses a counting array", "It is recursive", "It works with floating point numbers"],
+        "correctAnswer": "It uses a counting array"
+    },
+    {
+        "id": 6,
+        "topic": "Counting Sort",
+        "difficulty": "Application",
+        "question": "Using Counting Sort, sort [4, 2, 2, 1]. What is the sorted array?",
+        "options": ["[1, 2, 2, 4]", "[4, 2, 1, 2]", "[2, 1, 4, 2]"],
+        "correctAnswer": "[1, 2, 2, 4]"
+    }
+]
+
+
+[
+    {
+        "id": 0,
+        "topic": "Radix Sort",
+        "difficulty": "Memory",
+        "question": "What type of data is Radix Sort typically used for?",
+        "options": ["Floating-point numbers", "Strings and integers", "Unsorted arrays"],
+        "correctAnswer": "Strings and integers"
+    },
+    {
+        "id": 0,
+        "topic": "Radix Sort",
+        "difficulty": "Application",
+        "question": "Using Radix Sort, sort the numbers [170, 45, 75, 90]. What is the sorted array?",
+        "options": ["[45, 75, 90, 170]", "[170, 45, 75, 90]", "[75, 45, 90, 170]"],
+        "correctAnswer": "[45, 75, 90, 170]"
+    },
+    {
+        "id": 1,
+        "topic": "Bucket Sort",
+        "difficulty": "Memory",
+        "question": "What is a key characteristic of Bucket Sort?",
+        "options": ["It works well with uniformly distributed data", "It is a recursive algorithm", "It uses a pivot element"],
+        "correctAnswer": "It works well with uniformly distributed data"
+    },
+    {
+        "id": 1,
+        "topic": "Bucket Sort",
+        "difficulty": "Application",
+        "question": "Sort the array [0.42, 0.32, 0.52, 0.37] using Bucket Sort. What is the output?",
+        "options": ["[0.32, 0.37, 0.42, 0.52]", "[0.42, 0.32, 0.52, 0.37]", "[0.52, 0.37, 0.32, 0.42]"],
+        "correctAnswer": "[0.32, 0.37, 0.42, 0.52]"
+    },
+    {
+        "id": 2,
+        "topic": "Merge Sort",
+        "difficulty": "Memory",
+        "question": "What is the time complexity of Merge Sort in all cases?",
+        "options": ["O(n^2)", "O(n log n)", "O(n)"],
+        "correctAnswer": "O(n log n)"
+    },
+    {
+        "id": 2,
+        "topic": "Merge Sort",
+        "difficulty": "Application",
+        "question": "Divide the array [8, 3, 6, 1] in Merge Sort. What are the resulting halves?",
+        "options": ["[8, 3] and [6, 1]", "[3, 6] and [8, 1]", "[8, 6] and [3, 1]"],
+        "correctAnswer": "[8, 3] and [6, 1]"
+    },
+    {
+        "id": 3,
+        "topic": "Quick Sort",
+        "difficulty": "Memory",
+        "question": "What is the pivot in Quick Sort?",
+        "options": ["The largest element", "The first or chosen element", "The middle element"],
+        "correctAnswer": "The first or chosen element"
+    },
+    {
+        "id": 3,
+        "topic": "Quick Sort",
+        "difficulty": "Application",
+        "question": "Using Quick Sort, partition the array [10, 7, 8, 9, 1] with pivot 7. What is the array after partitioning?",
+        "options": ["[1, 7, 8, 9, 10]", "[7, 1, 8, 9, 10]", "[1, 7, 10, 9, 8]"],
+        "correctAnswer": "[1, 7, 8, 9, 10]"
+    },
+    {
+        "id": 4,
+        "topic": "Binary Search Tree (BST)",
+        "difficulty": "Memory",
+        "question": "Where is the smallest element located in a Binary Search Tree?",
+        "options": ["Rightmost node", "Leftmost node", "Root node"],
+        "correctAnswer": "Leftmost node"
+    },
+    {
+        "id": 4,
+        "topic": "Binary Search Tree (BST)",
+        "difficulty": "Application",
+        "question": "Insert 5 into the BST: 7 -> 3 -> 9. What does the tree look like?",
+        "options": ["7 -> 5 -> 3 -> 9", "7 -> 3 -> 5 -> 9", "7 -> 9 -> 3 -> 5"],
+        "correctAnswer": "7 -> 3 -> 5 -> 9"
+    },
+    {
+        "id": 5,
+        "topic": "Hash Table",
+        "difficulty": "Memory",
+        "question": "What is the main purpose of a Hash Table?",
+        "options": ["To store data in sorted order", "To provide fast access to data using keys", "To organize data sequentially"],
+        "correctAnswer": "To provide fast access to data using keys"
+    },
+    {
+        "id": 5,
+        "topic": "Hash Table",
+        "difficulty": "Application",
+        "question": "Using a hash table, insert key-value pairs: (1, A), (2, B), (3, C). What will be the value for key 2?",
+        "options": ["A", "B", "C"],
+        "correctAnswer": "B"
+    },
+    {
+        "id": 6,
+        "topic": "Breadth-First Search (BFS)",
+        "difficulty": "Memory",
+        "question": "Which data structure is used for BFS?",
+        "options": ["Stack", "Queue", "Heap"],
+        "correctAnswer": "Queue"
+    },
+    {
+        "id": 6,
+        "topic": "Breadth-First Search (BFS)",
+        "difficulty": "Application",
+        "question": "Perform BFS on the graph A -> B -> C -> D starting at A. What is the order of traversal?",
+        "options": ["A, C, B, D", "A, B, C, D", "B, A, C, D"],
+        "correctAnswer": "A, B, C, D"
+    },
+    {
+        "id": 7,
+        "topic": "Depth-First Search (DFS)",
+        "difficulty": "Memory",
+        "question": "Which data structure is used for DFS?",
+        "options": ["Queue", "Stack", "Heap"],
+        "correctAnswer": "Stack"
+    },
+    {
+        "id": 7,
+        "topic": "Depth-First Search (DFS)",
+        "difficulty": "Application",
+        "question": "Perform DFS on the graph A -> B -> C -> D starting at A. What is the order of traversal?",
+        "options": ["A, C, B, D", "A, B, C, D", "A, D, C, B"],
+        "correctAnswer": "A, C, B, D"
+    },
+    {
+        "id": 8,
+        "topic": "Heap",
+        "difficulty": "Memory",
+        "question": "What is the primary property of a Max Heap?",
+        "options": ["Parent nodes are greater than child nodes", "Parent nodes are smaller than child nodes", "The tree is balanced"],
+        "correctAnswer": "Parent nodes are greater than child nodes"
+    },
+    {
+        "id": 8,
+        "topic": "Heap",
+        "difficulty": "Application",
+        "question": "Insert 5 into the max heap [10, 8, 4]. What does the heap look like?",
+        "options": ["[10, 8, 5, 4]", "[10, 5, 4, 8]", "[10, 8, 4, 5]"],
+        "correctAnswer": "[10, 8, 5, 4]"
+    },
+    {
+        "id": 9,
+        "topic": "Topological Sort",
+        "difficulty": "Memory",
+        "question": "What kind of graph is required for Topological Sort?",
+        "options": ["Directed Acyclic Graph", "Undirected Graph", "Cyclic Graph"],
+        "correctAnswer": "Directed Acyclic Graph"
+    },
+    {
+        "id": 9,
+        "topic": "Topological Sort",
+        "difficulty": "Application",
+        "question": "Perform Topological Sort on the graph A -> B -> C -> D starting at A. What is a valid order?",
+        "options": ["A, B, C, D", "D, C, B, A", "B, A, C, D"],
+        "correctAnswer": "A, B, C, D"
+    }
+]
+
+[
+    {
+        "id": 0,
+        "topic": "AVL Tree",
+        "difficulty": "Memory",
+        "question": "What is the key property of an AVL Tree?",
+        "options": ["It is a self-balancing binary search tree", "All nodes have two children", "It is a binary heap"],
+        "correctAnswer": "It is a self-balancing binary search tree"
+    },
+    {
+        "id": 0,
+        "topic": "AVL Tree",
+        "difficulty": "Application",
+        "question": "Insert 10 into an AVL Tree: 20 -> 15 -> 25. What does the tree look like after balancing?",
+        "options": ["15 -> 10 -> 20 -> 25", "20 -> 10 -> 15 -> 25", "20 -> 15 -> 10 -> 25"],
+        "correctAnswer": "15 -> 10 -> 20 -> 25"
+    },
+    {
+        "id": 1,
+        "topic": "Dijkstra's Algorithm",
+        "difficulty": "Memory",
+        "question": "What is Dijkstra's Algorithm used for?",
+        "options": ["Finding the shortest path in a weighted graph", "Finding a minimum spanning tree", "Detecting cycles in a graph"],
+        "correctAnswer": "Finding the shortest path in a weighted graph"
+    },
+    {
+        "id": 1,
+        "topic": "Dijkstra's Algorithm",
+        "difficulty": "Application",
+        "question": "Using Dijkstra's Algorithm, find the shortest path from A to D in the graph: A->B: 1, B->D: 2, A->D: 4. What is the shortest path?",
+        "options": ["A -> B -> D", "A -> D", "A -> C -> D"],
+        "correctAnswer": "A -> B -> D"
+    },
+    {
+        "id": 2,
+        "topic": "Bellman-Ford Algorithm",
+        "difficulty": "Memory",
+        "question": "What makes Bellman-Ford different from Dijkstra's Algorithm?",
+        "options": ["It works with negative weights", "It uses a priority queue", "It cannot detect cycles"],
+        "correctAnswer": "It works with negative weights"
+    },
+    {
+        "id": 2,
+        "topic": "Bellman-Ford Algorithm",
+        "difficulty": "Application",
+        "question": "Using Bellman-Ford, find the shortest path from A to C with edges: A->B: 2, B->C: -1, A->C: 4. What is the shortest path?",
+        "options": ["A -> B -> C", "A -> C", "B -> A -> C"],
+        "correctAnswer": "A -> B -> C"
+    },
+    {
+        "id": 3,
+        "topic": "Kruskal's Algorithm",
+        "difficulty": "Memory",
+        "question": "What is the purpose of Kruskal's Algorithm?",
+        "options": ["Finding the shortest path", "Finding a minimum spanning tree", "Topological sorting"],
+        "correctAnswer": "Finding a minimum spanning tree"
+    },
+    {
+        "id": 3,
+        "topic": "Kruskal's Algorithm",
+        "difficulty": "Application",
+        "question": "Using Kruskal's Algorithm, find the minimum spanning tree for edges: A-B: 1, B-C: 3, A-C: 2. Which edges are chosen?",
+        "options": ["A-B and B-C", "A-B and A-C", "A-C and B-C"],
+        "correctAnswer": "A-B and A-C"
+    },
+    {
+        "id": 4,
+        "topic": "Prim's Algorithm",
+        "difficulty": "Memory",
+        "question": "What data structure is commonly used in Prim's Algorithm?",
+        "options": ["Stack", "Priority Queue", "Heap"],
+        "correctAnswer": "Priority Queue"
+    },
+    {
+        "id": 4,
+        "topic": "Prim's Algorithm",
+        "difficulty": "Application",
+        "question": "Using Prim's Algorithm, find the minimum spanning tree for edges: A-B: 2, B-C: 3, A-C: 1. Which edges are chosen?",
+        "options": ["A-B and B-C", "A-B and A-C", "A-C and B-C"],
+        "correctAnswer": "A-B and A-C"
+    },
+    {
+        "id": 5,
+        "topic": "Knapsack Problem",
+        "difficulty": "Memory",
+        "question": "What is the goal of the 0/1 Knapsack Problem?",
+        "options": ["Maximize weight", "Minimize items", "Maximize value within weight constraint"],
+        "correctAnswer": "Maximize value within weight constraint"
+    },
+    {
+        "id": 5,
+        "topic": "Knapsack Problem",
+        "difficulty": "Application",
+        "question": "Solve the 0/1 Knapsack Problem for items: {weight: 2, value: 6}, {weight: 3, value: 8}, with capacity 3. What is the maximum value?",
+        "options": ["6", "8", "14"],
+        "correctAnswer": "8"
+    },
+    {
+        "id": 6,
+        "topic": "Longest Common Subsequence (LCS)",
+        "difficulty": "Memory",
+        "question": "What is the LCS problem used for?",
+        "options": ["Finding the shortest path", "Finding the longest sequence of common characters", "Sorting two strings"],
+        "correctAnswer": "Finding the longest sequence of common characters"
+    },
+    {
+        "id": 6,
+        "topic": "Longest Common Subsequence (LCS)",
+        "difficulty": "Application",
+        "question": "Find the LCS of 'ABCD' and 'ACDB'. What is the result?",
+        "options": ["AB", "AD", "AC"],
+        "correctAnswer": "AB"
+    }
+]
+
+
+
+
