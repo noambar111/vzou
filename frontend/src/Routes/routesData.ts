@@ -10,6 +10,7 @@ import StackPage from "../pages/Animations/DataStructure/StackPage";
 import { BucketSortPage } from "../pages/Animations/sorts/BucketSortPage";
 import CountingSortPage from "../pages/Animations/sorts/CountingSortPage";
 import InsertionSortPage from "../pages/Animations/sorts/InsertionSortPage";
+import InsertionSortTestPage from "../noamExtentions/finalTest/InsertionSortTestPage"
 import MergeSortPage from "../pages/Animations/sorts/MergeSortPage";
 import QuickSortPage from "../pages/Animations/sorts/QuickSortPage";
 import RadixSortPage from "../pages/Animations/sorts/RadixSortPage";
@@ -78,6 +79,7 @@ export const userRoutes: RouteItem[] = [
   { path: RoutePaths.HASH_TABLE, element: HashTablePage },
   { path: RoutePaths.QUICK_SORT, element: QuickSortPage },
   { path: RoutePaths.INSERTION_SORT, element: InsertionSortPage },
+  { path: RoutePaths.INSERTION_SORT_TEST, element: InsertionSortTestPage },
   { path: RoutePaths.COUNTING_SORT, element: CountingSortPage },
   { path: RoutePaths.MERGE_SORT, element: MergeSortPage },
   { path: RoutePaths.BUCKET_SORT, element: BucketSortPage },

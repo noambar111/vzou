@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAppSelector } from "../store/hooks";
 import { selectAuthentication } from "../store/reducers/auth-reducer";
+import { useHistory } from "react-router-dom";
+
 
 // Predefined topics mapping by question ID
 const questionTopics = [
-    { name: "Insertion Sort", demoLink: "/DataStructure/BfsPage" },
+    { name: "Insertion Sort", demoLink: "/insertionsort" },
     { name: "Counting Sort", demoLink: "/DataStructure/CountingSortPage" },
     { name: "Quick Sort", demoLink: "/DataStructure/QuickSortPage" },
     { name: "Stack", demoLink: "/DataStructure/StackPage" },
@@ -17,6 +19,7 @@ const questionTopics = [
 ];
 
 const LearningPath = () => {
+    const history = useHistory();
     const [learningPath, setLearningPath] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -56,8 +59,10 @@ const LearningPath = () => {
 
     const handleQuizAttempt = (index) => {
         if (completedSteps.includes(index - 1) || index === 0) {
-            alert(`Starting quiz for ${questionTopics[index].name}`);
             setCompletedSteps((prev) => [...prev, index]);
+
+            // Navigate to the quiz test page
+            window.open(`/quiz/insertion-sort-test`, "_blank");
         } else {
             alert("Complete the previous step first!");
         }
@@ -105,44 +110,54 @@ const LearningPath = () => {
                         const demoLink = questionTopics[index]?.demoLink;
 
                         return (
-                            <g key={key}>
-                                {/* Circle */}
-                                <circle
-                                    cx={x}
-                                    cy={y}
-                                    r="20"
-                                    fill={getColor(value, index)}
-                                    stroke="black"
-                                    strokeWidth="2"
-                                    cursor="pointer"
-                                    onClick={() => handleQuizAttempt(index)}
-                                />
-                                {/* Topic Label */}
-                                <text
-                                    x={x}
-                                    y={y - 30}
-                                    fontSize="14"
-                                    fontWeight="bold"
-                                    fill="#333"
-                                    textAnchor="middle"
-                                    fontFamily="Arial, sans-serif"
-                                    cursor="pointer"
-                                    onClick={() => window.open(demoLink, "_blank")}
-                                >
-                                    {topic}
-                                </text>
-                                {/* Status Label */}
-                                <text
-                                    x={x}
-                                    y={y + 40}
-                                    fontSize="12"
-                                    fill={getColor(value, index)}
-                                    textAnchor="middle"
-                                    fontFamily="Arial, sans-serif"
-                                >
-                                    {completedSteps.includes(index) ? "Completed" : value}
-                                </text>
-                            </g>
+<g key={key} cursor="pointer">
+    {/* Circle */}
+    <circle
+        cx={x}
+        cy={y}
+        r="20"
+        fill={completedSteps.includes(index) ? "#27ae60" : getColor(value, index)} /* Green when completed */
+        stroke="black"
+        strokeWidth="2"
+        cursor="pointer"
+        onClick={() => handleQuizAttempt(index)}
+    />
+
+    {/* Topic Label */}
+    <text
+        x={x}
+        y={y - 30}
+        fontSize="14"
+        fontWeight="bold"
+        fill="#333"
+        textAnchor="middle"
+        fontFamily="Arial, sans-serif"
+        cursor="pointer"
+        onMouseEnter={(e) => {
+            e.target.style.fill = "#2980b9"; // Blue on hover
+            e.target.style.textDecoration = "underline"; // Underline on hover
+        }}
+        onMouseLeave={(e) => {
+            e.target.style.fill = "#333"; // Default color
+            e.target.style.textDecoration = "none"; // Remove underline
+        }}
+        onClick={() => window.open(demoLink, "_blank")}
+    >
+        {topic}
+    </text>
+
+    {/* Status Label */}
+    <text
+        x={x}
+        y={y + 40}
+        fontSize="12"
+        fill={completedSteps.includes(index) ? "#27ae60" : "#e74c3c"} /* Green if completed, red otherwise */
+        textAnchor="middle"
+        fontFamily="Arial, sans-serif"
+    >
+        {completedSteps.includes(index) ? "Completed" : value}
+    </text>
+</g>
                         );
                     })}
                 </svg>
