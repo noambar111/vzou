@@ -32,6 +32,7 @@ export enum RoutePaths {
   LINKED_LIST = "/linkedlist",
   HASH_TABLE = "/hashtable",
   QUICK_SORT = "/quicksort",
+  KNAPSACK = '/knapsack',
   INSERTION_SORT = "/insertionsort",
   INSERTION_SORT_TEST = "/quiz/insertion-sort-test",
   COUNTING_SORT = "/countingsort",

@@ -40,6 +40,7 @@ import Graphs from "../components/Home/Graphs";
 import DataStructures from "../components/Home/DataStructures";
 import KruskalPage from "../pages/Animations/DataStructure/KruskalPage";
 import Sorts from "../components/Home/Sorts";
+import KnapsackManager from "../noamExtentions/knapsack/Manager";
 
 export interface RouteItem {
   path: string;
@@ -78,6 +79,7 @@ export const userRoutes: RouteItem[] = [
   { path: RoutePaths.LINKED_LIST, element: LinkedListPage },
   { path: RoutePaths.HASH_TABLE, element: HashTablePage },
   { path: RoutePaths.QUICK_SORT, element: QuickSortPage },
+  { path: RoutePaths.KNAPSACK, element: KnapsackManager },
   { path: RoutePaths.INSERTION_SORT, element: InsertionSortPage },
   { path: RoutePaths.INSERTION_SORT_TEST, element: InsertionSortTestPage },
   { path: RoutePaths.COUNTING_SORT, element: CountingSortPage },

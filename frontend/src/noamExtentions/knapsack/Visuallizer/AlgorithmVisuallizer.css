@@ -1,0 +1,116 @@
+.algorithm_viisuallize_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; 
+    align-items: center; 
+    gap: 20px;
+    height: 110vh;    
+    background-color: #f8f9fa; 
+    height: 100vh;
+}
+
+.psuedo_code_container {
+    background-color: #d7f5c7;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+
+.code-list {
+    text-align: left;
+    list-style-type: none;          /* Remove the default list bullets */
+    padding: 0;                     /* Remove padding around the list */
+    margin: 0 0 4;             /* Add margin at the bottom of the list */
+}
+
+.next-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #28a745; /* Green button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: auto; /* Prevent stretching */
+    align-self: center; /* Center the button specifically */
+}
+
+.code-list pre {
+    justify-content: left;  
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+    font-family: monospace;
+}
+
+/* Highlight the active line */
+.code-list .highlight {
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    font-weight: bold; /* Bold text */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.highlight-cell {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .highlight {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .dp_table_container {
+    background-color: #d7f5c7; /* Light green background */
+    border: 1px solid #ddd; /* Gray border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 20px; /* Padding around the table */
+    text-align: center; /* Center align the text */
+    width: fit-content; /* Adjust to fit the content */
+}
+
+.dp_table_container table {
+    border-collapse: collapse; /* Remove extra space between cells */
+    width: 100%; /* Make the table span its container */
+    margin: 10px 0; /* Add spacing around the table */
+}
+
+.dp_table_container th, 
+.dp_table_container td {
+    border: 1px solid #ddd; /* Light gray border between cells */
+    padding: 10px; /* Padding inside cells */
+    text-align: center; /* Center align the cell content */
+    font-family: monospace; /* Use monospace font like pseudo code */
+    background-color: white; /* Default background color */
+}
+
+.dp_table_container th {
+    background-color: #007bff; /* Blue background for header */
+    color: white; /* White text for header */
+    font-weight: bold; /* Bold text */
+}
+
+.dp_table_container .highlight-cell {
+    background-color: #007bff; /* Blue background for highlight */
+    color: white; /* White text */
+    font-weight: bold; /* Bold text */
+    transition: background-color 0.3s ease; /* Smooth transition effect */
+}
+
+.control-pannel {
+    display: flex;
+    justify-content: center; /* Center the buttons horizontally */
+    align-items: center; /* Center the buttons vertically */
+    gap: 20px; /* Add spacing between the buttons */
+    margin-top: 20px; /* Add some space above the control panel */
+}
