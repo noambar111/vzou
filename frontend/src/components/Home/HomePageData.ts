@@ -172,6 +172,8 @@ const HomePageData = [
     url: RoutePaths.DJIKSTRA,
     type: "Graph",
   },
+  { title: "Knapsack Problem", gif:"",     image: "", url: "/knapsack", type: "DynamicProgramming" },
+
 ];
 
 export default HomePageData;

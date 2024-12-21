@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import UserInput from "./UserInput.js/UserInput";
 import AlgorithmVisualizer from "./Visuallizer/AlgorithmVisuallizer";
+import SideBar from "../../components/Layout/SideBar/SideBar";
 
 const KnapsackManager = () => {
     // State for managing input completion
@@ -15,6 +16,7 @@ const KnapsackManager = () => {
   
     return (
         <>
+          <SideBar />
           {inputHasEntered ? (
             <AlgorithmVisualizer 
                 inputData={inputData}
