@@ -36,6 +36,8 @@ import kruskalImg from "../../assets/Gallery/kruskalImg.png";
 import kruskalGif from "../../assets/Gallery/kruskalGif.gif";
 import primImg from "../../assets/Gallery/primImg.png";
 import primGif from "../../assets/Gallery/primGif.gif";
+import KnapsackGif from "../../assets/knapgif.gif";
+import KnapsackImg from "../../assets/Gallery/knapsack.png";
 import { RoutePaths } from "../../Routes/RoutePaths";
 
 const HomePageData = [
@@ -172,7 +174,7 @@ const HomePageData = [
     url: RoutePaths.DJIKSTRA,
     type: "Graph",
   },
-  { title: "Knapsack Problem", gif:"",     image: "", url: "/knapsack", type: "DynamicProgramming" },
+  { title: "Knapsack Problem", gif:KnapsackGif,     image: KnapsackImg, url: "/knapsack", type: "Dynamic Programming" },
 
 ];
 

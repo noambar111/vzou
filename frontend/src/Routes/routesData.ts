@@ -41,6 +41,7 @@ import DataStructures from "../components/Home/DataStructures";
 import KruskalPage from "../pages/Animations/DataStructure/KruskalPage";
 import Sorts from "../components/Home/Sorts";
 import KnapsackManager from "../noamExtentions/knapsack/Manager";
+import DynamicProgramming from "../components/Home/DynamicProg";
 
 export interface RouteItem {
   path: string;
@@ -69,6 +70,7 @@ export const userRoutes: RouteItem[] = [
   { path: RoutePaths.GRAPHS, element: Graphs },
   { path: RoutePaths.DATA_STRUCTURES, element: DataStructures },
   { path: RoutePaths.SORTS, element: Sorts },
+  { path: RoutePaths.DYNAMIC_PROG, element: DynamicProgramming },
 
   // Animations
   { path: RoutePaths.STACK, element: StackPage },
