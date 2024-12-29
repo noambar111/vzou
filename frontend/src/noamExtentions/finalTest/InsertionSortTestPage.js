@@ -2,40 +2,61 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./InsertionSortTestPage.css";
 
-const insertionSortQuestions = [
+const insertionSortApplicationQuestions = [
     {
         id: 1,
-        question: "What is the time complexity of Insertion Sort in the worst case?",
-        options: ["O(n)", "O(n log n)", "O(n^2)", "O(log n)"],
-        correct: "O(n^2)",
+        question: "Given the array [8, 3, 5, 2], what will be the state of the array after 3 steps of Insertion Sort?",
+        options: [
+            "[3, 8, 5, 2]",
+            "[3, 5, 8, 2]",
+            "[2, 3, 5, 8]",
+            "[8, 3, 2, 5]",
+        ],
+        correct: "[3, 5, 8, 2]",
     },
     {
         id: 2,
-        question: "Insertion Sort is best suited for:",
+        question: "You are given a nearly sorted dataset. Why would you choose Insertion Sort over other algorithms?",
         options: [
-            "Small datasets or nearly sorted datasets",
-            "Large unsorted datasets",
-            "Parallel processing",
-            "Distributed systems",
+            "It has a faster runtime for nearly sorted datasets",
+            "It can handle large datasets efficiently",
+            "It is designed for parallel processing",
+            "It is always faster than other sorting algorithms",
         ],
-        correct: "Small datasets or nearly sorted datasets",
+        correct: "It has a faster runtime for nearly sorted datasets",
     },
     {
         id: 3,
-        question: "What is the main advantage of Insertion Sort?",
+        question: "Write the state of the array after inserting the 3rd element of the array [7, 4, 5, 2] using Insertion Sort.",
         options: [
-            "It works in constant time",
-            "It is a stable sorting algorithm",
-            "It has linear time complexity for all inputs",
-            "It doesn't require memory",
+            "[4, 7, 5, 2]",
+            "[4, 5, 7, 2]",
+            "[7, 4, 5, 2]",
+            "[2, 4, 5, 7]",
         ],
-        correct: "It is a stable sorting algorithm",
+        correct: "[4, 5, 7, 2]",
     },
     {
         id: 4,
-        question: "In Insertion Sort, elements are compared and placed in the:",
-        options: ["Middle of the array", "Unsorted portion", "Sorted portion", "Random position"],
-        correct: "Sorted portion",
+        question: "How would you modify Insertion Sort to sort an array of objects by a specific property (e.g., age)?",
+        options: [
+            "Compare the specific property while sorting",
+            "Sort the array randomly",
+            "Use another sorting algorithm",
+            "Convert objects to strings and sort",
+        ],
+        correct: "Compare the specific property while sorting",
+    },
+    {
+        id: 5,
+        question: "For a partially sorted array, how does the performance of Insertion Sort compare to QuickSort?",
+        options: [
+            "Insertion Sort performs better for small, nearly sorted arrays",
+            "QuickSort always performs better",
+            "Both algorithms have the same performance",
+            "QuickSort is better for all cases",
+        ],
+        correct: "Insertion Sort performs better for small, nearly sorted arrays",
     },
 ];
 
@@ -50,7 +71,7 @@ const InsertionSortTestPage = () => {
 
     const handleSubmit = async () => {
         let currentScore = 0;
-        insertionSortQuestions.forEach((q) => {
+        insertionSortApplicationQuestions.forEach((q) => {
             if (answers[q.id] === q.correct) currentScore += 1;
         });
         setScore(currentScore);
@@ -60,7 +81,7 @@ const InsertionSortTestPage = () => {
             await axios.post("/api/learning-path/completion", {
                 testName: "Insertion Sort Final Test",
                 score: currentScore,
-                total: insertionSortQuestions.length,
+                total: insertionSortApplicationQuestions.length,
             });
         } catch (error) {
             console.error("Error submitting test results:", error);
@@ -72,7 +93,7 @@ const InsertionSortTestPage = () => {
             <h1 className="quiz-title">Insertion Sort - Final Test</h1>
             <p className="quiz-intro">Test your knowledge about Insertion Sort!</p>
 
-            {insertionSortQuestions.map((question) => (
+            {insertionSortApplicationQuestions.map((question) => (
                 <div key={question.id} className="question-container">
                     <h3 className="question">{question.question}</h3>
                     {question.options.map((option) => (
@@ -97,7 +118,7 @@ const InsertionSortTestPage = () => {
             ) : (
                 <div className="result">
                     <h2>
-                        Your Score: <span>{score}</span> / {insertionSortQuestions.length}
+                        Your Score: <span>{score}</span> / {insertionSortApplicationQuestions.length}
                     </h2>
                 </div>
             )}
