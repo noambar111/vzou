@@ -1,5 +1,52 @@
 import { Request, Response } from 'express';
 import UserTopicProgress from '../models/UserTopicProgress.js';
+import User from '../models/User.js';
+
+
+export const initProgress = async (req: Request, res: Response) => {
+  console.log("initProgress started");
+  console.log("initProgress started");
+  try {
+      const { userId, results } = req.body;
+      console.log("User ID:", userId);
+      // Update user completion status
+      const user = await User.findByPk(userId);
+      if (user) {
+          user.hasCompletedQuiz = true;
+          console.log("Before saving user:", user.toJSON());
+          await user.save();
+          console.log("User saved successfully.");
+      }
+
+      // Process results
+      for (const topicIdStr in results) {
+        const topicId = parseInt(topicIdStr, 10); // Convert string to integer
+        const status = results[topicIdStr];
+          console.log(`Processing topicId: ${topicId}, status: ${status}`);
+
+          if (status !== undefined && status !== null) {
+              try {
+                  await UserTopicProgress.upsert({
+                      userId,
+                      topicId,
+                      status,
+                      lastUpdated: new Date(),
+                  });
+                  console.log(`Progress updated for topicId: ${topicId}`);
+              } catch (err) {
+                  console.error(`Error updating topicId: ${topicId}`, err);
+              }
+          }
+      }
+
+      res.status(200).json({ message: "Progress updated successfully" });
+  } catch (error) {
+      console.error("Error updating progress:", error);
+      res.status(500).json({ message: "Failed to update progress" });
+  }
+};
+
+
 
 export const saveProgress = async (req: Request, res: Response) => {
   try {
