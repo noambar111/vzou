@@ -7,6 +7,7 @@ import LecturerRouter from './routes/LecturerRoutes.js'
 import UserRouter from './routes/UserRoutes.js'
 import UserInputRouter from './routes/UserInputRoutes.js'
 import TestResultsRoutes from './routes/TestResultsRoutes.js'
+import UserTopicRoutes from './routes/progressRoutes.js'
 
 // uncomment 2 next lines for production
 // import fs from 'fs'
@@ -26,6 +27,7 @@ app.use('/api/user', UserRouter)
 app.use('/api/lecturer', LecturerRouter)
 app.use('/api/input', UserInputRouter)
 app.use('/api/test-results', TestResultsRoutes);
+app.use('/api/user-progress', UserTopicRoutes);
 
 // uncomment the next line for production
 // const server = https.createServer(credentials, app)
