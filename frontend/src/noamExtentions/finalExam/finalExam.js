@@ -66,9 +66,6 @@ const FinalExam = ({ setFinalFlag, topicId, topicName }) => {
             ) : (
                 <div className="result">
                     <h2>Your Score: {score} / {questions.length}</h2>
-                    <h2 onClick={() => setFinalFlag(false)}>
-                        back to LearningPath.
-                    </h2>
                 </div>
             )}
             {!submitted && (
@@ -76,6 +73,22 @@ const FinalExam = ({ setFinalFlag, topicId, topicName }) => {
                     Submit
                 </button>
             )}
+            {/* Always display the Back to Learning Path button */}
+            <button
+                onClick={() => setFinalFlag(false)}
+                className="back-button"
+                style={{
+                    marginTop: "20px",
+                    padding: "10px 20px",
+                    backgroundColor: "#4CAF50",
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                }}
+            >
+                Back to Learning Path
+            </button>
         </div>
     );
 };
