@@ -1,0 +1,9 @@
+.circle {
+    transition: transform 0.2s ease, fill 0.2s ease; /* Smooth transition for hover effects */
+}
+
+.circle:hover {
+    transform: scale(1.2); /* Enlarge the circle slightly */
+    fill: #FF5722; /* Change the color on hover */
+    cursor: pointer; /* Change the cursor to a pointer */
+}

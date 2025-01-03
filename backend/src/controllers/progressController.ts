@@ -105,9 +105,20 @@ export const getProgress = async (req: Request, res: Response) => {
   }
 };
 
+
+export const justcheck = async (req: Request, res: Response) => {
+
+    res.status(200).json("ddd");
+
+};
+
 export const getAllProgressByUser = async (req: Request, res: Response) => {
   try {
+    console.log("getAllProgressByUser");
+
     const { userId } = req.params;
+
+    console.log("getAllProgressByUser");
 
     const progressList = await UserTopicProgress.findAll({
       where: { userId },

@@ -5,7 +5,7 @@ import { selectAuthentication } from "../store/reducers/auth-reducer";
 
 import FloatUpContainer from "../components/UI/FloatUpContainer";
 import QuizApp from "./levelTest/QuizApp";
-import LearningPath from "./LearningPath"; // Your learning path component
+import LearningPath from "./LearningPath/LearningPath"; // Your learning path component
 
 function CustomizedPage() {
   const [quizCompleted, setQuizCompleted] = useState(false); // Track quiz completion

@@ -27,7 +27,7 @@ app.use('/api/user', UserRouter)
 app.use('/api/lecturer', LecturerRouter)
 app.use('/api/input', UserInputRouter)
 app.use('/api/test-results', testResultsRoutes);
-app.use('/api/user-progress', testResultsRoutes);
+app.use('/api/user-progress', progressRoutes);
 
 const server = https.createServer(credentials, app)
 //Error Handler - Last middleware
