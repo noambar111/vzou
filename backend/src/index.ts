@@ -8,6 +8,7 @@ import UserRouter from './routes/UserRoutes.js'
 import UserInputRouter from './routes/UserInputRoutes.js'
 import TestResultsRoutes from './routes/TestResultsRoutes.js'
 import UserTopicRoutes from './routes/progressRoutes.js'
+import {bulkInsertQuestions, getQuestionsByTopic} from './controllers/QuestionsControllers.js'
 
 // uncomment 2 next lines for production
 // import fs from 'fs'
@@ -28,6 +29,8 @@ app.use('/api/lecturer', LecturerRouter)
 app.use('/api/input', UserInputRouter)
 app.use('/api/test-results', TestResultsRoutes);
 app.use('/api/user-progress', UserTopicRoutes);
+app.post('/api/questions/bulk-insert', bulkInsertQuestions);
+app.get('/api/get-questions-byTopic/:topicId', getQuestionsByTopic);
 
 // uncomment the next line for production
 // const server = https.createServer(credentials, app)

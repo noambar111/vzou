@@ -2,16 +2,17 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAppSelector } from "../../store/hooks"; 
 import { selectAuthentication } from "../../store/reducers/auth-reducer";
+import FinalExam from "../finalExam/finalExam";
 
 const questionTopics = [
-    { name: "Insertion Sort", demoLink: "/insertionsort", cx: 250, cy: 230, fill: "#FFC107", status: "unknown" },
-    { name: "Counting Sort", demoLink: "/DataStructure/CountingSortPage", cx: 360, cy: 135, fill: "#4CAF50", status: "unknown" },
-    { name: "Quick Sort", demoLink: "/DataStructure/QuickSortPage", cx: 450, cy: 110, fill: "#FFC107", status: "unknown" },
-    { name: "Merge Sort", demoLink: "/DataStructure/MergeSortPage", cx: 470, cy: 30, fill: "#4CAF50", status: "unknown" },
-    { name: "Radix Sort", demoLink: "/DataStructure/RadixSortPage", cx: 560, cy: 180, fill: "#FFC107", status: "unknown" },
-    { name: "Selection Sort", demoLink: "/DataStructure/SelectionSortPage", cx: 150, cy: 270, fill: "#FFC107", status: "unknown" },
-    { name: "Bubble Sort", demoLink: "/DataStructure/BubbleSortPage", cx: 150, cy: 50, fill: "#4CAF50", status: "unknown" },
-    { name: "Bucket Sort", demoLink: "/DataStructure/BucketSortPage", cx: 450, cy: 270, fill: "#4CAF50", status: "unknown" },
+    { topicId: 0, name: "Insertion Sort", demoLink: "/insertionsort", finalExam: "/quiz/insertion-sort-test", cx: 250, cy: 230, fill: "#FFC107", status: "unknown" },
+    { topicId: 1, name: "Counting Sort", demoLink: "/DataStructure/CountingSortPage", cx: 360, cy: 135, fill: "#4CAF50", status: "unknown" },
+    { topicId: 2, name: "Quick Sort", demoLink: "/DataStructure/QuickSortPage", cx: 450, cy: 110, fill: "#FFC107", status: "unknown" },
+    { topicId: 3, name: "Merge Sort", demoLink: "/DataStructure/MergeSortPage", cx: 470, cy: 30, fill: "#4CAF50", status: "unknown" },
+    { topicId: 4, name: "Radix Sort", demoLink: "/DataStructure/RadixSortPage", cx: 560, cy: 180, fill: "#FFC107", status: "unknown" },
+    { topicId: 5, name: "Selection Sort", demoLink: "/DataStructure/SelectionSortPage", cx: 150, cy: 270, fill: "#FFC107", status: "unknown" },
+    { topicId: 6, name: "Bubble Sort", demoLink: "/DataStructure/BubbleSortPage", cx: 150, cy: 50, fill: "#4CAF50", status: "unknown" },
+    { topicId: 7, name: "Bucket Sort", demoLink: "/DataStructure/BucketSortPage", cx: 450, cy: 270, fill: "#4CAF50", status: "unknown" },
 ];
 
 const topicMap = {
@@ -44,21 +45,33 @@ const topicMap = {
 const getStatusColor = (status) => {
     switch (status) {
         case 0:
-            return "#FF5722"; // red for "memory level fail"
+            return "#FF0000"; // red for "memory level fail"
         case 1:
-            return "#FFC107"; // Yellow for "memory level pass"
+            return "#FF8C00"; // orange for "app level passes"
         case 2:
-            return "#4CAF50"; // orange for "app level passes"
+            return "#FFD700"; // Yellow for "memory level pass"
+        case 3:
+            return "#008000"; // green for complete
         default:
-            return "#D3D3D3"; // Red for "Unknown"
+            return "#D3D3D3"; // grey for "Unknown"
     }
 };
 
 const LearningPath = () => {
+    const [currentTopicId, setCurrentTopicId] = useState(null);
+    const [finalFlag, setFinalFlag] = useState(false);
     const [hoveredCircle, setHoveredCircle] = useState(null);
-    const [topics, setTopics] = useState([]);
+    const [hoveredText, setHoveredText] = useState(null);
+    const [topics, setTopics] = useState(questionTopics);
     const authSlice = useAppSelector(selectAuthentication);
     
+    const handleTextMouseEnter = (topic) => {
+        setHoveredText(topic);
+    };
+
+    const handleTextMouseLeave = () => {
+        setHoveredText(null);
+    };
 
     const handleMouseEnter = (topic) => {
         setHoveredCircle(topic);
@@ -68,31 +81,36 @@ const LearningPath = () => {
         setHoveredCircle(null);
     };
 
+    const userId = authSlice.user?.id; // Get user ID from authentication state
+
     useEffect(() => {
         const fetchTopicStatuses = async () => {
             try {
-                const userId = authSlice.user?.id; // Get user ID from authentication state
                 const response = await axios.get(`http://localhost:3001/api/user-progress/user/${userId}`);
                 const topicsStatus = response.data;
-                console.log(topicsStatus);
-                
-                const processData = (topicsStatus) => {
-                    return topicsStatus.map((item) => ({
-                        name: topicMap[item.topicId], // Get the name using topicId
-                        status: item.status,         // Keep the status
-                        lastUpdated: item.lastUpdated, // Include the lastUpdated field if needed
-                    }));
-                };
 
+                // Process and update the topics state
+                const updatedTopics = questionTopics.map((topic) => {
+                    const matchedStatus = topicsStatus.find(
+                        (status) => topicMap[status.topicId] === topic.name
+                    );
+                    return {
+                        ...topic,
+                        status: matchedStatus ? matchedStatus.status : "unknown",
+                        fill: matchedStatus ? getStatusColor(matchedStatus.status) : "#D3D3D3",
+                    };
+                });
+                console.log(updatedTopics);
+                setTopics(updatedTopics); // Update state with new topic data
             } catch (error) {
                 console.error("Error fetching topic statuses:", error);
             }
         };
 
         fetchTopicStatuses();
-    }, []);
+    }, [authSlice.user?.id]);
 
-    return (
+    return !finalFlag ? (
         <svg width="1000" height="1000" style={{ margin: "0 auto", display: "block" }}>
             {/* Paths */}
             <path
@@ -146,32 +164,37 @@ const LearningPath = () => {
             />
 
             {/* Circles */}
-            {questionTopics.map((topic, index) => (
+            {topics.map((topic, index) => (
                 <>
-                <circle
-                    key={index}
-                    cx={topic.cx}
-                    cy={topic.cy}
-                    r={hoveredCircle === topic.name ? 18 : 15} // Enlarges on hover
-                    fill={hoveredCircle === topic.name ? "#FF5722" : topic.fill} // Changes color on hover
-                    className="circle"
-                    onClick={() => alert(`${topic.name}`)} // Replace with navigation if needed
-                    onMouseEnter={() => handleMouseEnter(topic.name)}
-                    onMouseLeave={handleMouseLeave}
-                    style={{ cursor: "pointer", transition: "all 0.2s ease" }}
-                />
+                    <circle
+                        cx={topic.cx}
+                        cy={topic.cy}
+                        r={hoveredCircle === topic.name ? 18 : 15} // Enlarges on hover
+                        fill={hoveredCircle === topic.name ? "#22daff" : topic.fill} // Changes color on hover
+                        onMouseEnter={() => handleMouseEnter(topic.name)}
+                        onMouseLeave={handleMouseLeave}
+                        onClick={() => {setFinalFlag(true); setCurrentTopicId(topic.topicId);}}
+                        style={{ cursor: "pointer", transition: "all 0.2s ease" }}
+                    />
                 <text
                     x={topic.name === "Counting Sort" ? topic.cx + 0 : topic.cx + 20} // Lower only Counting Sort
                     y={topic.name === "Counting Sort" ? topic.cy + 35 : topic.cy + 5} // Lower only Counting Sort
-                    fill="#333"
-                    fontSize="14"
+                    fill={hoveredText === topic.name ? "#22daff" : "#333"}
+                    fontSize={ hoveredText === topic.name ? 18 : 14}
                     fontWeight="bold"
+                    onClick={() => window.open(topic.demoLink, "_blank")
+                        
+                    }
+                    onMouseEnter={() => handleTextMouseEnter(topic.name)}
+                    onMouseLeave={handleTextMouseLeave}
                 >
                     {topic.name}
                 </text>
                 </>
             ))}
         </svg>
+    ) : (
+        <FinalExam setFinalFlag={setFinalFlag} topicId={currentTopicId} topicName={topicMap[currentTopicId]}/>
     );
 };
 

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./InsertionSortTestPage.css";
+import { useAppSelector } from "../../../store/hooks"; 
+import { selectAuthentication } from "../../../store/reducers/auth-reducer";
 
 const insertionSortApplicationQuestions = [
     {
@@ -61,9 +63,11 @@ const insertionSortApplicationQuestions = [
 ];
 
 const InsertionSortTestPage = () => {
+    const authSlice = useAppSelector(selectAuthentication);
     const [answers, setAnswers] = useState({});
     const [submitted, setSubmitted] = useState(false);
     const [score, setScore] = useState(0);
+    const [allRight, setAllRight] = useState(false);
 
     const handleOptionChange = (questionId, selectedOption) => {
         setAnswers((prev) => ({ ...prev, [questionId]: selectedOption }));
@@ -74,18 +78,21 @@ const InsertionSortTestPage = () => {
         insertionSortApplicationQuestions.forEach((q) => {
             if (answers[q.id] === q.correct) currentScore += 1;
         });
+
+        if(currentScore == 5) 
+        {
+            const userId = authSlice.user?.id; // Get user ID from authentication state
+            setAllRight(true);
+            const topicId = 0;
+            const response = await axios.post(`http://localhost:3001/api/user-progress/save`, {
+                userId,
+                topicId,
+            });
+            
+        }
+
         setScore(currentScore);
         setSubmitted(true);
-
-        try {
-            await axios.post("/api/learning-path/completion", {
-                testName: "Insertion Sort Final Test",
-                score: currentScore,
-                total: insertionSortApplicationQuestions.length,
-            });
-        } catch (error) {
-            console.error("Error submitting test results:", error);
-        }
     };
 
     return (

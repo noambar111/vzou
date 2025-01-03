@@ -10,7 +10,7 @@ import StackPage from "../pages/Animations/DataStructure/StackPage";
 import { BucketSortPage } from "../pages/Animations/sorts/BucketSortPage";
 import CountingSortPage from "../pages/Animations/sorts/CountingSortPage";
 import InsertionSortPage from "../pages/Animations/sorts/InsertionSortPage";
-import InsertionSortTestPage from "../noamExtentions/finalTest/InsertionSortTestPage"
+import InsertionSortTestPage from "../noamExtentions/finalTest/insertion/InsertionSortTestPage"
 import MergeSortPage from "../pages/Animations/sorts/MergeSortPage";
 import QuickSortPage from "../pages/Animations/sorts/QuickSortPage";
 import RadixSortPage from "../pages/Animations/sorts/RadixSortPage";

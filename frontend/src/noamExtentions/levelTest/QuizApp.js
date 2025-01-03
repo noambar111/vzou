@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { useAppSelector } from "../../store/hooks"; // Your Redux hook
+import { useAppSelector } from "../../store/hooks"; 
 import { selectAuthentication } from "../../store/reducers/auth-reducer";
 
 import './QuizApp.css'; // Custom scoped CSS

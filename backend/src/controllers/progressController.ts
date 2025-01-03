@@ -49,35 +49,35 @@ export const initProgress = async (req: Request, res: Response) => {
 
 
 export const saveProgress = async (req: Request, res: Response) => {
+  console.log("saveProgress");
   try {
-    const { userId, topicId, newStatus } = req.body;
+    const { userId, topicId } = req.body;
 
-    if (!userId || !topicId || newStatus === undefined) {
+    if (!userId || !topicId  === undefined) {
       return res.status(400).json({ message: 'Invalid request data' });
     }
-
-    // Validation: Ensure status progression is logical
-    const existingProgress = await UserTopicProgress.findOne({ where: { userId, topicId } });
-
-    if (newStatus === 2 && (!existingProgress || existingProgress.status < 1)) {
-      return res.status(400).json({
-        message: 'Cannot set status to 2 without passing memory level.',
+    const existingProgress = await UserTopicProgress.findOne({
+      where: {
+          userId,
+          topicId,
+      },
+  });
+  
+  if (existingProgress) {
+      // Update the existing record
+      await existingProgress.update({
+          status: 3,
+          lastUpdated: new Date(),
       });
-    }
-
-    // Prevent regression in status
-    if (existingProgress && newStatus < existingProgress.status) {
-      return res.status(400).json({ message: 'Cannot regress progress status.' });
-    }
-
-    // Upsert progress
-    await UserTopicProgress.upsert({
-      userId,
-      topicId,
-      status: newStatus,
-      lastUpdated: new Date(),
-    });
-
+  } else {
+      // Insert a new record
+      await UserTopicProgress.create({
+          userId,
+          topicId,
+          status: 3,
+          lastUpdated: new Date(),
+      });
+  }
     res.status(201).json({ message: 'Progress saved successfully.' });
   } catch (error) {
     console.error('Error saving progress:', error);
