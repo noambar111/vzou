@@ -19,12 +19,16 @@ const questionTopics = [
     { topicId: 11, name: "Queue", demoLink: "/", cx: 550, cy: 350, fill: "#4CAF50", status: "unknown" },
     { topicId: 12, name: "Heap", demoLink: "/", cx: 700, cy: 290, fill: "#4CAF50", status: "unknown" },
     { topicId: 13, name: "Prim", demoLink: "/", cx: 850, cy: 300, fill: "#4CAF50", status: "unknown" },
-    { topicId: 14, name: "BFS", demoLink: "/", cx: 720, cy: 380, fill: "#4CAF50", status: "unknown" },
+    { topicId: 14, name: "BFS", demoLink: "/", cx: 710, cy: 375, fill: "#4CAF50", status: "unknown" },
     { topicId: 15, name: "Dijkstra's algorithm", demoLink: "/", cx: 830, cy: 430, fill: "#4CAF50", status: "unknown" },
-    { topicId: 16, name: "Knapsack", demoLink: "/", cx: 220, cy: 570, fill: "#4CAF50", status: "unknown" },
-    { topicId: 17, name: "LCS", demoLink: "/", cx: 220, cy: 670, fill: "#4CAF50", status: "unknown" },
-
-
+    { topicId: 16, name: "Knapsack", demoLink: "/", cx: 890, cy: 570, fill: "#4CAF50", status: "unknown" },
+    { topicId: 17, name: "LCS", demoLink: "/", cx: 890, cy: 670, fill: "#4CAF50", status: "unknown" },
+    { topicId: 18, name: "Hash Table", demoLink: "/", cx: 300, cy: 500, fill: "#4CAF50", status: "unknown" },
+    { topicId: 19, name: "Stack", demoLink: "/", cx: 250, cy: 630, fill: "#4CAF50", status: "unknown" },
+    { topicId: 20, name: "DFS", demoLink: "/", cx: 370, cy: 700, fill: "#4CAF50", status: "unknown" },
+    { topicId: 21, name: "Topological Sort", demoLink: "/", cx: 500, cy: 750, fill: "#4CAF50", status: "unknown" },
+    { topicId: 22, name: "Bellman-Ford", demoLink: "/", cx: 890, cy: 370, fill: "#4CAF50", status: "unknown" },
+    { topicId: 23, name: "Kruskal's Algorithm", demoLink: "/", cx: 850, cy: 230, fill: "#4CAF50", status: "unknown" },
 ];
 
 const topicMap = {
@@ -220,9 +224,35 @@ const LearningPath = () => {
                 strokeLinecap="round"
             />
 
+            {/* HASH */}
+            <path
+                d="M200,423  C230,450 240,440 300,500"
+                stroke="#4A90E2"
+                fill="transparent"
+                strokeWidth="4"
+                strokeLinecap="round"
+            />
+
+            {/* stack + DFS + Topological sort */}
+            <path
+                d="M250,630  C370,700 370,720 500,750"
+                stroke="#4A90E2"
+                fill="transparent"
+                strokeWidth="4"
+                strokeLinecap="round"
+            />
+
             {/* Queue + Heap + Prime*/}
             <path
                 d="M550,350  C620,260 640,265 720,300 C720,300 750,320 850,300"
+                stroke="#4A90E2"
+                fill="transparent"
+                strokeWidth="4"
+                strokeLinecap="round"
+            />
+            {/* Kruskal's Algorithm*/}
+            <path
+                d="M750,307 C760,307 780,320 850,230"
                 stroke="#4A90E2"
                 fill="transparent"
                 strokeWidth="4"
@@ -236,10 +266,18 @@ const LearningPath = () => {
                 strokeWidth="4"
                 strokeLinecap="round"
             />
+            {/* Bellman-Ford*/}
+                <path
+                d="M750,395  C750,400 760,380 890,370"
+                stroke="#4A90E2"
+                fill="transparent"
+                strokeWidth="4"
+                strokeLinecap="round"
+            />
 
             {/* Knapsack + LCS*/}
             <path
-                d="M80,600  C170,610 110,570 220,570 "
+                d="M750,600  C840,610 780,570 890,570 "
                 stroke="#4A90E2"
                 fill="transparent"
                 strokeWidth="4"
@@ -247,7 +285,7 @@ const LearningPath = () => {
             />
 
             <path
-                d="M80,600  C170,650 110,670 220,670 "
+                d="M750,600  C840,650 780,670 890,670 "
                 stroke="#4A90E2"
                 fill="transparent"
                 strokeWidth="4"
