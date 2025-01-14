@@ -85,6 +85,18 @@ const LearningPath = () => {
         setHoveredText(topic);
     };
 
+    const handlePassedTheTest = () => {
+        console.log("handlePassedTheTest");
+        const tmpTopics = [...topics];
+        const updatedTopics = tmpTopics.map((topic) =>
+            topic.topicId === currentTopicId
+                ? { ...topic, status: 3, fill: "#008000" } 
+                : topic
+        );
+        setTopics(updatedTopics); // עדכון ה-state עם המערך החדש
+        console.log(updatedTopics);
+    };
+
     const handleTextMouseLeave = () => {
         setHoveredText(null);
     };
@@ -357,7 +369,7 @@ const LearningPath = () => {
             ))}
         </svg>
     ) : (
-        <FinalExam setFinalFlag={setFinalFlag} topicId={currentTopicId} topicName={topicMap[currentTopicId]}/>
+        <FinalExam setFinalFlag={setFinalFlag} handlePassedTheTest={handlePassedTheTest} topicId={currentTopicId} topicName={topicMap[currentTopicId]}/>
     );
 };
 

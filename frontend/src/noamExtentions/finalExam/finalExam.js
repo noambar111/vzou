@@ -4,7 +4,7 @@ import { useAppSelector } from "./../../store/hooks";
 import { selectAuthentication } from "./../../store/reducers/auth-reducer";
 import "./FinalExam.css";
 
-const FinalExam = ({ setFinalFlag, topicId, topicName }) => {
+const FinalExam = ({ setFinalFlag, handlePassedTheTest, topicId, topicName }) => {
     const authSlice = useAppSelector(selectAuthentication);
     const [answers, setAnswers] = useState({});
     const [questions, setQuestions] = useState([]);
@@ -29,9 +29,15 @@ const FinalExam = ({ setFinalFlag, topicId, topicName }) => {
 
     const handleSubmit = async () => {
         let currentScore = 0;
+        console.log("Answers submitted:", answers);
+        console.log("Questions fetched:", questions);
         questions.forEach((q) => {
+            console.log(`Question ID: ${q.id}, Correct Answer: ${q.correct}, User Answer: ${answers[q.id]}`);
+
             if (answers[q.id] === q.correct) currentScore += 1;
+            console.log(score);
         });
+        console.log(currentScore);
 
         if (currentScore === questions.length) {
             const userId = authSlice.user?.id;
@@ -40,6 +46,7 @@ const FinalExam = ({ setFinalFlag, topicId, topicName }) => {
 
         setScore(currentScore);
         setSubmitted(true);
+        handlePassedTheTest();
     };
 
     return (
