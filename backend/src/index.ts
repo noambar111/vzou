@@ -85,7 +85,7 @@ app.post('/api/questions/bulk-insert/lcs', bulkInsertLCSQuestions);
 
 
 
-app.get('/api/get-questions-byTopic/:topicId', getQuestionsByTopic);
+app.get('/api/get-questions-byTopic/:topicId/:questionLevel', getQuestionsByTopic);
 
 // uncomment the next line for production
 // const server = https.createServer(credentials, app)

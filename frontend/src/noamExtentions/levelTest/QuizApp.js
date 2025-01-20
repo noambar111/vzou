@@ -6,8 +6,11 @@ import { selectAuthentication } from "../../store/reducers/auth-reducer";
 import './QuizApp.css'; // Custom scoped CSS
 import questions from './questions.json'; // Questions JSON file
 import axios from 'axios';
+import { useHistory } from "react-router-dom"; // For redirection
+
 
 const QuizApp = () => {
+    const history = useHistory();
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // Index of current question
     const [results, setResults] = useState(new Array(24).fill(0)); // Object to store answers by question ID
     const [isComplete, setIsComplete] = useState(false); // Completion status
@@ -49,6 +52,9 @@ const QuizApp = () => {
         const request = {"userId" : userId, "results" : results};
         axios
           .post("http://localhost:3001/api/user-progress/initProgress", request )
+          .then(() => {
+            window.location.href = '/';
+        })
           .catch((err) => {
             console.error("Error during quiz submission or status update:", err);
             alert("An error occurred. Please try again.");

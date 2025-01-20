@@ -64,12 +64,13 @@ export const saveProgress = async (req: Request, res: Response) => {
   });
   
   if (existingProgress) {
-      // Update the existing record
-      await existingProgress.update({
-          status: 3,
-          lastUpdated: new Date(),
-      });
-  } else {
+    // Update the existing record, incrementing the status by 1
+    const newStatus = existingProgress.status + 1; // Increment the current status
+    await existingProgress.update({
+      status: newStatus,
+      lastUpdated: new Date(),
+    });
+  }  else {
       // Insert a new record
       await UserTopicProgress.create({
           userId,

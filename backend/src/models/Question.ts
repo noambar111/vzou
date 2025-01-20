@@ -7,6 +7,7 @@ class Question extends Model {
   public question!: string; // The text of the question
   public options!: string[]; // Array of options for the question
   public correct!: string; // The correct answer
+  public questionLevel!: number; // Level of the question (0 = Memory, 1 = Application, 2 = Analysis)
   public createdAt!: Date; // Timestamp for record creation
   public updatedAt!: Date; // Timestamp for record updates
 }
@@ -33,6 +34,13 @@ Question.init(
     correct: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    questionLevel: {
+      type: DataTypes.INTEGER, // Using INTEGER for levels
+      allowNull: false,
+      validate: {
+        isIn: [[0, 1, 2]], // Ensures only 0, 1, or 2 are allowed
+      },
     },
     createdAt: {
       type: DataTypes.DATE,

@@ -5,30 +5,30 @@ import { selectAuthentication } from "../../store/reducers/auth-reducer";
 import FinalExam from "../finalExam/finalExam";
 
 const questionTopics = [
-    { topicId: 2, name: "Insertion Sort", demoLink: "/insertionsort", finalExam: "/quiz/insertion-sort-test", cx: 250, cy: 230, fill: "#FFC107", status: "unknown" },
-    { topicId: 6, name: "Counting Sort", demoLink: "/countingsort", cx: 360, cy: 135, fill: "#4CAF50", status: "unknown" },
-    { topicId: 10, name: "Quick Sort", demoLink: "/quicksort", cx: 450, cy: 110, fill: "#FFC107", status: "unknown" },
-    { topicId: 9, name: "Merge Sort", demoLink: "/mergesort", cx: 470, cy: 30, fill: "#4CAF50", status: "unknown" },
-    { topicId: 7, name: "Radix Sort", demoLink: "/radixsort", cx: 560, cy: 180, fill: "#FFC107", status: "unknown" },
-    { topicId: 0, name: "Selection Sort", demoLink: "/", cx: 150, cy: 270, fill: "#FFC107", status: "unknown" },
-    { topicId: 1, name: "Bubble Sort", demoLink: "/", cx: 150, cy: 50, fill: "#4CAF50", status: "unknown" },
-    { topicId: 8, name: "Bucket Sort", demoLink: "/bucketsort", cx: 450, cy: 270, fill: "#4CAF50", status: "unknown" },
-    { topicId: 5, name: "Linked List", demoLink: "/linkedlist", cx: 150, cy: 400, fill: "#4CAF50", status: "unknown" },
-    { topicId: 11, name: "Binary Search Tree", demoLink: "/bst", cx: 340, cy: 435, fill: "#4CAF50", status: "unknown" },
-    { topicId: 17, name: "AVL Tree", demoLink: "/avl", cx: 500, cy: 500, fill: "#4CAF50", status: "unknown" },
-    { topicId: 4, name: "Queue", demoLink: "/queue", cx: 550, cy: 350, fill: "#4CAF50", status: "unknown" },
-    { topicId: 15, name: "Heap", demoLink: "/heap", cx: 700, cy: 290, fill: "#4CAF50", status: "unknown" },
-    { topicId: 21, name: "Prim", demoLink: "/prim", cx: 850, cy: 300, fill: "#4CAF50", status: "unknown" },
-    { topicId: 13, name: "BFS", demoLink: "/bfs", cx: 710, cy: 375, fill: "#4CAF50", status: "unknown" },
-    { topicId: 18, name: "Dijkstra's Algorithm", demoLink: "/djikstra", cx: 830, cy: 430, fill: "#4CAF50", status: "unknown" },
-    { topicId: 22, name: "Knapsack", demoLink: "/knapsack", cx: 890, cy: 570, fill: "#4CAF50", status: "unknown" },
-    { topicId: 23, name: "LCS", demoLink: "/", cx: 890, cy: 670, fill: "#4CAF50", status: "unknown" },
-    { topicId: 12, name: "Hash Table", demoLink: "/hashtable", cx: 300, cy: 500, fill: "#4CAF50", status: "unknown" },
-    { topicId: 3, name: "Stack", demoLink: "/stack", cx: 250, cy: 630, fill: "#4CAF50", status: "unknown" },
-    { topicId: 14, name: "DFS", demoLink: "/dfs", cx: 370, cy: 700, fill: "#4CAF50", status: "unknown" },
-    { topicId: 16, name: "Topological Sort", demoLink: "/", cx: 500, cy: 750, fill: "#4CAF50", status: "unknown" },
-    { topicId: 19, name: "Bellman-Ford", demoLink: "/bellman-ford", cx: 890, cy: 370, fill: "#4CAF50", status: "unknown" },
-    { topicId: 20, name: "Kruskal's Algorithm", demoLink: "/kruskal", cx: 850, cy: 230, fill: "#4CAF50", status: "unknown" },
+    { topicId: 2, clusterId: 0, name: "Insertion Sort", demoLink: "/insertionsort", finalExam: "/quiz/insertion-sort-test", cx: 250, cy: 230, fill: "#FFC107", status: "unknown" },
+    { topicId: 6, clusterId: 0, name: "Counting Sort", demoLink: "/countingsort", cx: 360, cy: 135, fill: "#4CAF50", status: "unknown" },
+    { topicId: 10, clusterId: 0, name: "Quick Sort", demoLink: "/quicksort", cx: 450, cy: 110, fill: "#FFC107", status: "unknown" },
+    { topicId: 9, clusterId: 0, name: "Merge Sort", demoLink: "/mergesort", cx: 470, cy: 30, fill: "#4CAF50", status: "unknown" },
+    { topicId: 7, clusterId: 0, name: "Radix Sort", demoLink: "/radixsort", cx: 560, cy: 180, fill: "#FFC107", status: "unknown" },
+    { topicId: 0, clusterId: 0, name: "Selection Sort", demoLink: "/", cx: 150, cy: 270, fill: "#FFC107", status: "unknown" },
+    { topicId: 1, clusterId: 0, name: "Bubble Sort", demoLink: "/", cx: 150, cy: 50, fill: "#4CAF50", status: "unknown" },
+    { topicId: 8, clusterId: 0, name: "Bucket Sort", demoLink: "/bucketsort", cx: 450, cy: 270, fill: "#4CAF50", status: "unknown" },
+    { topicId: 5, clusterId: 1, name: "Linked List", demoLink: "/linkedlist", cx: 150, cy: 400, fill: "#4CAF50", status: "unknown" },
+    { topicId: 11, clusterId: 1, name: "Binary Search Tree", demoLink: "/bst", cx: 340, cy: 435, fill: "#4CAF50", status: "unknown" },
+    { topicId: 17, clusterId: 1, name: "AVL Tree", demoLink: "/avl", cx: 500, cy: 500, fill: "#4CAF50", status: "unknown" },
+    { topicId: 4, clusterId: 1,name: "Queue", demoLink: "/queue", cx: 550, cy: 350, fill: "#4CAF50", status: "unknown" },
+    { topicId: 15, clusterId: 1,name: "Heap", demoLink: "/heap", cx: 700, cy: 290, fill: "#4CAF50", status: "unknown" },
+    { topicId: 21, clusterId: 2 ,name: "Prim", demoLink: "/prim", cx: 850, cy: 300, fill: "#4CAF50", status: "unknown" },
+    { topicId: 13, clusterId: 2 ,name: "BFS", demoLink: "/bfs", cx: 710, cy: 375, fill: "#4CAF50", status: "unknown" },
+    { topicId: 18, clusterId: 2 ,name: "Dijkstra's Algorithm", demoLink: "/djikstra", cx: 830, cy: 430, fill: "#4CAF50", status: "unknown" },
+    { topicId: 22, clusterId: 3 ,name: "Knapsack", demoLink: "/knapsack", cx: 890, cy: 570, fill: "#4CAF50", status: "unknown" },
+    { topicId: 23, clusterId: 3 ,name: "LCS", demoLink: "/", cx: 890, cy: 670, fill: "#4CAF50", status: "unknown" },
+    { topicId: 12, clusterId: 1 ,name: "Hash Table", demoLink: "/hashtable", cx: 300, cy: 500, fill: "#4CAF50", status: "unknown" },
+    { topicId: 3, clusterId: 1,name: "Stack", demoLink: "/stack", cx: 250, cy: 630, fill: "#4CAF50", status: "unknown" },
+    { topicId: 14, clusterId: 2 ,name: "DFS", demoLink: "/dfs", cx: 370, cy: 700, fill: "#4CAF50", status: "unknown" },
+    { topicId: 16, clusterId: 2 ,name: "Topological Sort", demoLink: "/", cx: 500, cy: 750, fill: "#4CAF50", status: "unknown" },
+    { topicId: 19, clusterId: 2 ,name: "Bellman-Ford", demoLink: "/bellman-ford", cx: 890, cy: 370, fill: "#4CAF50", status: "unknown" },
+    { topicId: 20, clusterId: 2 ,name: "Kruskal's Algorithm", demoLink: "/kruskal", cx: 850, cy: 230, fill: "#4CAF50", status: "unknown" },
 ];
 
 const topicMap = {
@@ -58,15 +58,43 @@ const topicMap = {
     23: "LCS",
 };
 
+const getStartsNum = (status) => {
+    switch (status) {
+        case 0:
+            return "★"; 
+        case 1:
+            return "★★"; 
+        case 2:
+            return "★★★"; 
+        case 3:
+            return "🏆"; 
+        default:
+            return ""; 
+    }
+}
+
+const getClusterColor = (clusterId) => {
+    switch (clusterId) {
+        case 0:
+            return "#62808a"; 
+        case 1:
+            return "#946678"; 
+        case 2:
+            return "#d9417c"; 
+        case 3:
+            return "#491273"; 
+        default:
+            return ""; 
+    }
+}
+
 const getStatusColor = (status) => {
     switch (status) {
         case 0:
-            return "#FF0000"; // red for "memory level fail"
+            return "#5463a1"; // red for "memory level fail"
         case 1:
-            return "#FF8C00"; // orange for "app level passes"
-        case 2:
             return "#FFD700"; // Yellow for "memory level pass"
-        case 3:
+        case 2:
             return "#008000"; // green for complete
         default:
             return "#D3D3D3"; // grey for "Unknown"
@@ -88,12 +116,14 @@ const LearningPath = () => {
     const handlePassedTheTest = () => {
         console.log("handlePassedTheTest");
         const tmpTopics = [...topics];
+        const prevS = topics.find(topic => topic.topicId === currentTopicId)?.status
+
         const updatedTopics = tmpTopics.map((topic) =>
             topic.topicId === currentTopicId
-                ? { ...topic, status: 3, fill: "#008000" } 
+                ? { ...topic, status: prevS + 1, fill: "#008000" } 
                 : topic
         );
-        setTopics(updatedTopics); // עדכון ה-state עם המערך החדש
+        setTopics(updatedTopics); 
         console.log(updatedTopics);
     };
 
@@ -109,61 +139,53 @@ const LearningPath = () => {
         setHoveredCircle(null);
     };
 
+    const topicDependencies = {
+        7: [6], // Radix
+        15: [4], // Heap
+        13: [4], // BFS
+        20: [15], // Kruskal
+        21: [15], // Prim
+        19: [13], // Bellman-Ford
+        18: [13], // Dijkstra 
+        11: [5], // Binary Search Tree
+        12: [5], // Hash Table
+        17: [11], // AVL
+        14: [3], // DFS 
+        16: [14], // Topological Sort
+    };
+
+    const areDependenciesMet = (topicId, topics) => {
+        const dependencies = topicDependencies[topicId] || [];
+        for (let depId of dependencies) {
+            const depTopic = topics.find(t => t.topicId === depId);
+            console.log("dep topic " + depTopic.name)
+            const currentTopic = topics.find(t => t.topicId === topicId);
+    
+            if (!depTopic || depTopic.status + 1 === currentTopic.status ) {
+                return true; 
+            }
+            if (!depTopic || depTopic.status > currentTopic.status ) {
+                return true; 
+            }
+        }
+        return false; 
+    };
+
     const handleFinalExam = (topic) => {
-        console.log(topics);
-        if(topic.topicId === 7 && topics[6].status != 3) //radix
-        {
-            alert("Must complete Counting Sort first!")
+        console.log(topic);
+        setCurrentTopicId(topic.topicId);
+    
+        if (topic.status === 3) {
+            alert(`Well done! You have completed ${topic.name} topic!`);
+            return;
         }
-        else if(topic.topicId === 15 && topics[4].status != 3) //heap
-        {
-            alert("Must complete Queue D-S first!")
+    
+        if (!areDependenciesMet(topic.topicId, topics)) {
+            alert("Must complete prerequisite topics in the correct order!");
+            return;
         }
-        else if(topic.topicId === 13 && topics[4].status != 3) // BFS
-        {
-            alert("Must complete Queue D-S first!")
-        }
-        else if(topic.topicId === 20 && topics[15].status != 3) //kruskal
-        {
-            alert("Must complete Heap D-S first!")
-        }
-        else if(topic.topicId === 21 && topics[15].status != 3) // prim
-        {
-            alert("Must complete Heap D-S first!")
-        }
-        else if(topic.topicId === 19 && topics[13].status != 3) // bellmanFord
-        {
-            alert("Must complete BFS Algorithm first!")
-        }
-        else if(topic.topicId === 18 && topics[13].status != 3) // djks
-        {
-            alert("Must complete BFS Algorithm first!")
-        }
-        else if(topic.topicId === 11 && topics[5].status != 3) // bst
-        {
-            alert("Must complete Linked-List D-S first!")
-        }
-        else if(topic.topicId === 12 && topics[5].status != 3) // hash table
-        {
-            alert("Must complete Linked-List D-S first!")
-        }
-        else if(topic.topicId === 17 && topics[11].status != 3) // hash table
-        {
-            alert("Must complete Binary Search Tree first!")
-        }
-        else if(topic.topicId === 14 && topics[3].status != 3) // dfs
-        {
-            alert("Must complete Stack D-S first!")
-        }
-        else if(topic.topicId === 16 && topics[14].status != 3) // dfs
-        {
-            alert("Must complete DFS Algorithm first!")
-        }
-        else
-        {
-            setFinalFlag(true); 
-            setCurrentTopicId(topic.topicId);
-        }
+    
+        setFinalFlag(true);
     };
 
     const userId = authSlice.user?.id; // Get user ID from authentication state
@@ -343,14 +365,23 @@ const LearningPath = () => {
                     <circle
                         cx={topic.cx}
                         cy={topic.cy}
-                        r={hoveredCircle === topic.name ? 18 : 15} // Enlarges on hover
-                        fill={hoveredCircle === topic.name ? "#22daff" : topic.fill} // Changes color on hover
+                        r={hoveredCircle === topic.name ? 18 : 17} // Enlarges on hover
+                        fill={hoveredCircle === topic.name ? "#22daff" : getClusterColor(topic.clusterId)} // Changes color on hover
                         onMouseEnter={() => handleMouseEnter(topic.name)}
                         onMouseLeave={handleMouseLeave}
                         onClick={() => {handleFinalExam(topics[index]); setHoveredCircle(null); }
                     }
                         style={{ cursor: "pointer", transition: "all 0.2s ease" }}
                     />
+                <text
+                    x={topic.cx}
+                    y={topic.cy + 5} 
+                    fill="gold"
+                    fontSize="12"
+                    textAnchor="middle"
+                    fontWeight="bold"
+                    >{getStartsNum(topic.status)}
+                </text>
                 <text
                     x={topic.name === "Counting Sort" ? topic.cx + 0 : topic.cx + 20} // Lower only Counting Sort
                     y={topic.name === "Counting Sort" ? topic.cy + 35 : topic.cy + 5} // Lower only Counting Sort
@@ -369,7 +400,12 @@ const LearningPath = () => {
             ))}
         </svg>
     ) : (
-        <FinalExam setFinalFlag={setFinalFlag} handlePassedTheTest={handlePassedTheTest} topicId={currentTopicId} topicName={topicMap[currentTopicId]}/>
+        <FinalExam setFinalFlag={setFinalFlag} 
+        handlePassedTheTest={handlePassedTheTest} 
+        topicId={currentTopicId} 
+        topicName={topicMap[currentTopicId]} 
+        questionLevel={ topics.find(topic => topic.topicId === currentTopicId)?.status}
+    />
     );
 };
 
