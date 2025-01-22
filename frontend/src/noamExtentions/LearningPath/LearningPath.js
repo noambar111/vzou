@@ -175,15 +175,15 @@ const LearningPath = () => {
         console.log(topic);
         setCurrentTopicId(topic.topicId);
     
-        if (topic.status === 3) {
-            alert(`Well done! You have completed ${topic.name} topic!`);
-            return;
-        }
+        // if (topic.status === 3) {
+        //     alert(`Well done! You have completed ${topic.name} topic!`);
+        //     return;
+        // }
     
-        if (!areDependenciesMet(topic.topicId, topics)) {
-            alert("Must complete prerequisite topics in the correct order!");
-            return;
-        }
+        // if (!areDependenciesMet(topic.topicId, topics)) {
+        //     alert("Must complete prerequisite topics in the correct order!");
+        //     return;
+        // }
     
         setFinalFlag(true);
     };

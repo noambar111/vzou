@@ -3,63 +3,76 @@ import HomeGallery from "../components/Home/HomeGallery";
 import FloatUpContainer from "../components/UI/FloatUpContainer";
 import CustomizedPage from "../noamExtentions/CustomizedPage";
 import { useHomePageContext } from "../noamExtentions/HomePageContext";
-import { useAppSelector } from "../store/hooks"; // Assuming you're using Redux
-import { selectAuthentication } from "../store/reducers/auth-reducer"; // Select authentication slice
-import { useHistory } from "react-router-dom"; // For redirection
+import { useAppSelector } from "../store/hooks"; 
+import { selectAuthentication } from "../store/reducers/auth-reducer";
+import { useHistory } from "react-router-dom";
+import "./HomePage.css";
 
 function HomePage() {
   const { showHomeGallery, setShowHomeGallery } = useHomePageContext();
   const authSlice = useAppSelector(selectAuthentication);
   const history = useHistory();
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
-    // Reset state when the component mounts
     setShowHomeGallery(null);
   }, [setShowHomeGallery]);
 
   const handleSelection = (isHomeGallery: boolean) => {
     if (!isHomeGallery && !authSlice.isLoggedIn) {
-      // Redirect to login if user is not logged in and selects Custom Web
       history.push("/login");
     } else {
-      setShowHomeGallery(isHomeGallery); // Set the choice
+      setShowHomeGallery(isHomeGallery);
     }
   };
 
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
+
   return (
-    <div style={{ textAlign: "center", padding: "20px" }}>
+    <div className="home-page-container">
       {showHomeGallery === null ? (
-        <div style={{ marginBottom: "20px" }}>
-          <button
-            onClick={() => handleSelection(true)}
-            style={{
-              padding: "10px 20px",
-              margin: "0 10px",
-              backgroundColor: "#4CAF50",
-              color: "white",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
+        <div className="button-container">
+          <button onClick={() => handleSelection(true)} className="green-button">
             Home Gallery
           </button>
-          <button
-            onClick={() => handleSelection(false)}
-            style={{
-              padding: "10px 20px",
-              margin: "0 10px",
-              backgroundColor: "#f44336",
-              color: "white",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
+          <button onClick={togglePopup} className="info-button">
+            Click Me!
+          </button>
+          <button onClick={() => handleSelection(false)} className="red-button">
             Custom Web
           </button>
         </div>
       ) : null}
+
+      {showPopup && (
+        <div className="popup-overlay" onClick={togglePopup}>
+          <div
+            className="popup-content"
+            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the popup
+          >
+            <h2>What is VZOU?</h2>
+            <div className="popup-section">
+              <h3>Custom Web</h3>
+              <p>
+                This option allows you to analyze your knowledge and create a 
+                personalized learning path to help you progress efficiently and effectively.
+              </p>
+            </div>
+            <div className="popup-section">
+              <h3>Home Gallery</h3>
+              <p>
+                The Home Gallery lets you explore all the algorithms and data 
+                structures that VZOU offers in an interactive and visual way.
+              </p>
+            </div>
+            <button onClick={togglePopup} className="close-popup-button">
+              Close
+            </button>
+          </div>
+        </div>
+      )}
 
       <FloatUpContainer>
         {showHomeGallery === null ? null : showHomeGallery ? (
@@ -67,9 +80,7 @@ function HomePage() {
         ) : authSlice.isLoggedIn ? (
           <CustomizedPage />
         ) : (
-          <div style={{ color: "red", fontWeight: "bold" }}>
-            Redirecting to login...
-          </div>
+          <div className="redirect-message">Redirecting to login...</div>
         )}
       </FloatUpContainer>
     </div>
