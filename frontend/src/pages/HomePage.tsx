@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import HomeGallery from "../components/Home/HomeGallery";
 import FloatUpContainer from "../components/UI/FloatUpContainer";
 import CustomizedPage from "../noamExtentions/CustomizedPage";
 import { useHomePageContext } from "../noamExtentions/HomePageContext";
-import { useAppSelector } from "../store/hooks"; 
+import { useAppSelector } from "../store/hooks";
 import { selectAuthentication } from "../store/reducers/auth-reducer";
 import { useHistory } from "react-router-dom";
 import "./HomePage.css";
@@ -12,7 +12,6 @@ function HomePage() {
   const { showHomeGallery, setShowHomeGallery } = useHomePageContext();
   const authSlice = useAppSelector(selectAuthentication);
   const history = useHistory();
-  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     setShowHomeGallery(null);
@@ -26,54 +25,40 @@ function HomePage() {
     }
   };
 
-  const togglePopup = () => {
-    setShowPopup(!showPopup);
-  };
-
   return (
     <div className="home-page-container">
-      {showHomeGallery === null ? (
-        <div className="button-container">
-          <button onClick={() => handleSelection(true)} className="green-button">
-            Home Gallery
-          </button>
-          <button onClick={togglePopup} className="info-button">
-            Click Me!
-          </button>
+      {/* Main Content Row */}
+      {showHomeGallery === null && (
+        <div className="content-row">
+          {/* Buttons for selecting the view */}
+          <div className="button-container">
           <button onClick={() => handleSelection(false)} className="red-button">
-            Custom Web
-          </button>
-        </div>
-      ) : null}
-
-      {showPopup && (
-        <div className="popup-overlay" onClick={togglePopup}>
-          <div
-            className="popup-content"
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the popup
-          >
+              Custom Web
+            </button>
+            <button onClick={() => handleSelection(true)} className="green-button">
+              Home Gallery
+            </button>
+          </div>
+  
+          <div className="info-section">
             <h2>What is VZOU?</h2>
-            <div className="popup-section">
+            <div className="info-card custom-web">
               <h3>Custom Web</h3>
               <p>
-                This option allows you to analyze your knowledge and create a 
-                personalized learning path to help you progress efficiently and effectively.
+                Dive into a personalized learning experience! Analyze your knowledge and create a unique path tailored to your progress.
               </p>
             </div>
-            <div className="popup-section">
+            <div className="info-card home-gallery">
               <h3>Home Gallery</h3>
               <p>
-                The Home Gallery lets you explore all the algorithms and data 
-                structures that VZOU offers in an interactive and visual way.
+                Explore an interactive showcase of algorithms and data structures. Visualize complex concepts with ease and clarity.
               </p>
             </div>
-            <button onClick={togglePopup} className="close-popup-button">
-              Close
-            </button>
           </div>
         </div>
       )}
-
+  
+      {/* Main content area */}
       <FloatUpContainer>
         {showHomeGallery === null ? null : showHomeGallery ? (
           <HomeGallery />
