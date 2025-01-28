@@ -157,35 +157,30 @@ const LearningPath = () => {
     const areDependenciesMet = (topicId, topics) => {
         const dependencies = topicDependencies[topicId] || [];
         for (let depId of dependencies) {
-            const depTopic = topics.find(t => t.topicId === depId);
-            console.log("dep topic " + depTopic.name)
-            const currentTopic = topics.find(t => t.topicId === topicId);
-    
-            if (!depTopic || depTopic.status + 1 === currentTopic.status ) {
-                return true; 
-            }
-            if (!depTopic || depTopic.status > currentTopic.status ) {
-                return true; 
+            const depTopic = topics.find((t) => t.topicId === depId);
+            if (!depTopic || depTopic.status < 1) {
+                // If any dependency has a status less than 1, return false
+                return false;
             }
         }
-        return false; 
+        return true; // All dependencies are met
     };
 
     const handleFinalExam = (topic) => {
         console.log(topic);
         setCurrentTopicId(topic.topicId);
     
-        // if (topic.status === 3) {
-        //     alert(`Well done! You have completed ${topic.name} topic!`);
-        //     return;
-        // }
+        if (topic.status === 3) {
+            alert(`Well done! You have already completed the ${topic.name} topic!`);
+            return;
+        }
     
-        // if (!areDependenciesMet(topic.topicId, topics)) {
-        //     alert("Must complete prerequisite topics in the correct order!");
-        //     return;
-        // }
+        if (!areDependenciesMet(topic.topicId, topics)) {
+            alert(`You must achieve at least one star in the prerequisite topic(s) to unlock ${topic.name}.`);
+            return;
+        }
     
-        setFinalFlag(true);
+        setFinalFlag(true); // Proceed to the final exam
     };
 
     const userId = authSlice.user?.id; // Get user ID from authentication state
@@ -220,6 +215,28 @@ const LearningPath = () => {
     }, [authSlice.user?.id]);
 
     return !finalFlag ? (
+        
+    <div style={{ display: "flex",flexDirection: "column", justifyContent: "space-between", margin: "0 auto", width: "1000px" }}>
+
+        {/* Info Section */}
+        <div style={{ width: "1000px", padding: "20px", border: "1px solid #ccc", borderRadius: "10px", backgroundColor: "#f9f9f9" }}>
+            <h3>Learning Path Information</h3>
+            <p>
+                This learning path is based on <strong>Bloom's Taxonomy</strong>, which categorizes the learning process into six levels:
+            </p>
+            <ol>
+                <li><strong>Remember:</strong> Recall basic concepts and terms.</li>
+                <li><strong>Understand:</strong> Explain and interpret ideas.</li>
+                <li><strong>Apply:</strong> Use concepts in real-life scenarios.</li>
+                <li><strong>Analyze:</strong> Break down information into components.</li>
+                <li><strong>Evaluate:</strong> Assess and justify decisions.</li>
+                <li><strong>Create:</strong> Build new ideas or processes.</li>
+            </ol>
+            <p>
+                Progress through the topics step-by-step, unlocking advanced concepts as you demonstrate mastery in foundational topics.
+            </p>
+            <p style={{ fontStyle: "italic" }}>Click on any topic to begin exploring its content and tests.</p>
+        </div>
         <svg width="1000" height="800" style={{ margin: "0 auto", display: "block" }}>
             {/* Paths */}
 
@@ -399,6 +416,7 @@ const LearningPath = () => {
                 </>
             ))}
         </svg>
+        </div>
     ) : (
         <FinalExam setFinalFlag={setFinalFlag} 
         handlePassedTheTest={handlePassedTheTest} 
