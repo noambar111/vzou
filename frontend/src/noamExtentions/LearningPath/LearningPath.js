@@ -3,6 +3,7 @@ import axios from "axios";
 import { useAppSelector } from "../../store/hooks"; 
 import { selectAuthentication } from "../../store/reducers/auth-reducer";
 import FinalExam from "../finalExam/finalExam";
+import "./LearningPath.css";
 
 const questionTopics = [
     { topicId: 2, clusterId: 0, name: "Insertion Sort", demoLink: "/insertionsort", finalExam: "/quiz/insertion-sort-test", cx: 250, cy: 230, fill: "#FFC107", status: "unknown" },
@@ -107,7 +108,11 @@ const LearningPath = () => {
     const [hoveredCircle, setHoveredCircle] = useState(null);
     const [hoveredText, setHoveredText] = useState(null);
     const [topics, setTopics] = useState(questionTopics);
+    const [showInfo, setShowInfo] = useState(true);
     const authSlice = useAppSelector(selectAuthentication);
+    const toggleInfo = () => {
+        setShowInfo(!showInfo);
+    };
     
     const handleTextMouseEnter = (topic) => {
         setHoveredText(topic);
@@ -216,27 +221,56 @@ const LearningPath = () => {
 
     return !finalFlag ? (
         
-    <div style={{ display: "flex",flexDirection: "column", justifyContent: "space-between", margin: "0 auto", width: "1000px" }}>
+        <div className="learning-path-container">
+            
+            {/* Toggle Button */}
+            <button className="toggle-btn" onClick={toggleInfo}>
+                {showInfo ? "Hide Information" : "Show Information"}
+            </button>
 
-        {/* Info Section */}
-        <div style={{ width: "1000px", padding: "20px", border: "1px solid #ccc", borderRadius: "10px", backgroundColor: "#f9f9f9" }}>
-            <h3>Learning Path Information</h3>
-            <p>
-                This learning path is based on <strong>Bloom's Taxonomy</strong>, which categorizes the learning process into six levels:
-            </p>
-            <ol>
-                <li><strong>Remember:</strong> Recall basic concepts and terms.</li>
-                <li><strong>Understand:</strong> Explain and interpret ideas.</li>
-                <li><strong>Apply:</strong> Use concepts in real-life scenarios.</li>
-                <li><strong>Analyze:</strong> Break down information into components.</li>
-                <li><strong>Evaluate:</strong> Assess and justify decisions.</li>
-                <li><strong>Create:</strong> Build new ideas or processes.</li>
-            </ol>
-            <p>
-                Progress through the topics step-by-step, unlocking advanced concepts as you demonstrate mastery in foundational topics.
-            </p>
-            <p style={{ fontStyle: "italic" }}>Click on any topic to begin exploring its content and tests.</p>
-        </div>
+            <div className={`info-sectionX1 ${showInfo ? "" : "hidden"}`}>
+    <h3>Learning Path Information</h3>
+    <p>
+        This learning path is based on <strong>Bloom's Taxonomy</strong>, which categorizes the learning process into six levels:
+    </p>
+    <ol>
+        <li><strong>Remember:</strong> Recall basic concepts and terms.</li>
+        <li><strong>Understand:</strong> Explain and interpret ideas.</li>
+        <li><strong>Apply:</strong> Use concepts in real-life scenarios.</li>
+        <li><strong>Analyze:</strong> Break down information into components.</li>
+        <li><strong>Evaluate:</strong> Assess and justify decisions.</li>
+        <li><strong>Create:</strong> Build new ideas or processes.</li>
+    </ol>
+    <p>
+        Progress through the topics step-by-step, unlocking advanced concepts as you demonstrate mastery in foundational topics.
+    </p>
+    <p>
+        On our platform, we cover three levels: <strong>Remember, Apply, and Analyze</strong>.
+    </p>
+    <p>
+        <strong>One star ★</strong> represents a memory question.
+    </p> 
+    <p>
+        <strong>Two stars ★★</strong> represent an application question.
+    </p>
+    <p>
+        <strong>Three stars ★★★</strong> represent an analysis question.
+    </p>
+    <p>
+        If you would like to learn more about Bloom's Taxonomy, you can find additional information at the following link:
+        <a 
+            href="https://en.wikipedia.org/wiki/Bloom%27s_taxonomy" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={{ color: "#007BFF", textDecoration: "underline", marginLeft: "5px" }}
+        >
+            Bloom's Taxonomy
+        </a>.
+    </p>
+    <p style={{ fontStyle: "italic" }}>
+        Click on any topic to begin exploring its content and tests.
+    </p>
+</div>
         <svg width="1000" height="800" style={{ margin: "0 auto", display: "block" }}>
             {/* Paths */}
 
