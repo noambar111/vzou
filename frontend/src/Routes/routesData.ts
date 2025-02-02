@@ -41,6 +41,7 @@ import DataStructures from "../components/Home/DataStructures";
 import KruskalPage from "../pages/Animations/DataStructure/KruskalPage";
 import Sorts from "../components/Home/Sorts";
 import KnapsackManager from "../noamExtentions/knapsack/Manager";
+import TopSortManager from "../noamExtentions/topologicalSort/Manager";
 import DynamicProgramming from "../components/Home/DynamicProg";
 
 export interface RouteItem {
@@ -82,6 +83,7 @@ export const userRoutes: RouteItem[] = [
   { path: RoutePaths.HASH_TABLE, element: HashTablePage },
   { path: RoutePaths.QUICK_SORT, element: QuickSortPage },
   { path: RoutePaths.KNAPSACK, element: KnapsackManager },
+  { path: RoutePaths.TOPSORT, element: TopSortManager },
   { path: RoutePaths.INSERTION_SORT, element: InsertionSortPage },
   { path: RoutePaths.INSERTION_SORT_TEST, element: InsertionSortTestPage },
   { path: RoutePaths.COUNTING_SORT, element: CountingSortPage },

@@ -241,9 +241,7 @@ const LearningPath = () => {
         <li><strong>Evaluate:</strong> Assess and justify decisions.</li>
         <li><strong>Create:</strong> Build new ideas or processes.</li>
     </ol>
-    <p>
-        Progress through the topics step-by-step, unlocking advanced concepts as you demonstrate mastery in foundational topics.
-    </p>
+
     <p>
         On our platform, we cover three levels: <strong>Remember, Apply, and Analyze</strong>.
     </p>
