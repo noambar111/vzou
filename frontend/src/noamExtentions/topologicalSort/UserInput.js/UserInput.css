@@ -1,17 +1,20 @@
 /* General Page Container */
 .page-container {
-  margin-left: 270px;
+  margin-left: 400px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1.5fr; /* Three-column layout */
+  grid-template-columns: 1fr 0.6fr 1.5fr; /* Three-column layout */
   gap: 20px; /* Spacing between columns */
   align-items: start; /* Align content at the top */
   padding: 20px;
   background-color: #f4f4f4; /* Light gray background */
+  width: 70%; /* Full width in its column */
+
 }
 
 /* Form Container Styling */
 .form-container {
-  align-items: start; /* Align content at the top */
+  margin-top: 22px;
+  align-items: flex-start; /* Align content at the top */
   background-color: #e8f5e9;
   padding: 20px;
   border-radius: 10px;
@@ -62,6 +65,7 @@
 /* Nodes and Edges Containers */
 .nodes-container,
 .edges-container {
+  
   background-color: #ffffff;
   border-radius: 10px;
   padding: 20px;
@@ -76,6 +80,19 @@
   color: #2e7d32;
   margin-bottom: 15px;
   text-align: center;
+}
+
+.nodes-container > div {
+  background-color: #f9f9f9;
+  padding: 10px; /* Reduce padding */
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 10px; /* Reduce spacing */
+  width: 80%; /* Reduce width */
+  max-width: 100px; /* Prevents excessively wide cards */
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Individual Node and Edge Cards */

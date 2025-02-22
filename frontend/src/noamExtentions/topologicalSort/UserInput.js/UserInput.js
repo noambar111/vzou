@@ -4,31 +4,36 @@ import "./UserInput.css";
 const UserInput = ({ setInputData, setInputHasEntered }) => {
   const [numNodes, setNumNodes] = useState(0);
   const [edges, setEdges] = useState([]);
-  const [nodes, setNodes] = useState([]);
 
   const handleNumNodesChange = (value) => {
     const nodeCount = parseInt(value) || 0;
     if (nodeCount < 0) {
       alert("Number of nodes cannot be negative!");
-    } else {
-      setNumNodes(nodeCount);
-      setNodes((prevNodes) => {
-        const updatedNodes = Array(nodeCount)
-          .fill("")
-          .map((_, idx) => prevNodes[idx] || `Node ${idx + 1}`);
-        return updatedNodes;
-      });
+      return;
     }
+    setNumNodes(nodeCount);
   };
 
-  const handleEdgeChange = (index, field, value) => {
-    const updatedEdges = [...edges];
-    updatedEdges[index] = {
-      ...updatedEdges[index],
-      [field]: value.trim(),
-    };
-    setEdges(updatedEdges);
-  };
+const handleEdgeChange = (index, field, value) => {
+  const updatedEdges = [...edges];
+  const newEdge = { ...updatedEdges[index], [field]: value.trim() };
+
+  // Ensure both start and end nodes are selected before checking duplicates
+  if (newEdge.start && newEdge.end) {
+    // Check if the same edge already exists (excluding the current editing edge)
+    const isDuplicate = edges.some((edge, idx) =>
+      idx !== index && edge.start === newEdge.start && edge.end === newEdge.end
+    );
+
+    if (isDuplicate) {
+      alert("This edge already exists! Please choose different nodes.");
+      return;
+    }
+  }
+
+  updatedEdges[index] = newEdge;
+  setEdges(updatedEdges);
+};
 
   const handleNumEdgesChange = (value) => {
     const edgeCount = parseInt(value) || 0;
@@ -44,22 +49,57 @@ const UserInput = ({ setInputData, setInputHasEntered }) => {
     }
   };
 
+  const hasCycle = (nodes, edges) => {
+    // Step 1: Build the graph (Adjacency List) & calculate in-degree
+    const adjList = {};
+    const inDegree = {};
+  
+    nodes.forEach(node => {
+      adjList[node] = [];
+      inDegree[node] = 0;
+    });
+  
+    edges.forEach(({ start, end }) => {
+      adjList[start].push(end);
+      inDegree[end]++;
+    });
+  
+    // Step 2: Initialize a queue with nodes having in-degree 0
+    const queue = Object.keys(inDegree).filter(node => inDegree[node] === 0);
+  
+    let count = 0; // Count of visited nodes
+  
+    // Step 3: Process nodes with in-degree 0
+    while (queue.length > 0) {
+      const node = queue.shift(); // Remove front of queue
+      count++;
+  
+      adjList[node].forEach((neighbor) => {
+        inDegree[neighbor]--;
+        if (inDegree[neighbor] === 0) queue.push(neighbor);
+      });
+    }
+  
+    // Step 4: If we couldn't process all nodes, a cycle exists
+    return count !== nodes.length;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
+    const nodes = Array.from({ length: numNodes }, (_, i) => `Node ${i + 1}`);
+  
     if (numNodes === 0 || edges.some((edge) => !edge.start || !edge.end)) {
       alert("Please fill in all fields!");
       return;
     }
-
-    const invalidEdges = edges.some(
-      (edge) => !nodes.includes(edge.start) || !nodes.includes(edge.end)
-    );
-    if (invalidEdges) {
-      alert("Edges must reference valid nodes!");
+  
+    // Check for cycles before submitting
+    if (hasCycle(nodes, edges)) {
+      alert("The graph contains a cycle! Please remove circular dependencies.");
       return;
     }
-
+  
     setInputData({ nodes, edges });
     setInputHasEntered(true);
   };
@@ -106,25 +146,14 @@ const UserInput = ({ setInputData, setInputHasEntered }) => {
 
       <div className="nodes-container mt-6">
         <h2 className="text-xl font-semibold mb-4">Nodes</h2>
-        {nodes.map((node, index) => (
+        {Array.from({ length: numNodes }, (_, index) => (
           <div
             key={index}
             className="p-4 bg-white rounded-lg shadow-md mb-4 flex items-center"
           >
-            <label className="text-sm font-medium text-gray-700 mr-2">
-              Node {index + 1}:
+            <label className="text-sm font-medium text-gray-700">
+              {`Node ${index + 1}`}
             </label>
-            <input
-              type="text"
-              value={node}
-              onChange={(e) => {
-                const updatedNodes = [...nodes];
-                updatedNodes[index] = e.target.value.trim();
-                setNodes(updatedNodes);
-              }}
-              placeholder="Enter node name"
-              className="w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
-            />
           </div>
         ))}
       </div>
@@ -148,9 +177,9 @@ const UserInput = ({ setInputData, setInputHasEntered }) => {
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
                 >
                   <option value="">Select start node</option>
-                  {nodes.map((node, idx) => (
-                    <option key={idx} value={node}>
-                      {node}
+                  {Array.from({ length: numNodes }, (_, idx) => (
+                    <option key={idx} value={`Node ${idx + 1}`}>
+                      {`Node ${idx + 1}`}
                     </option>
                   ))}
                 </select>
@@ -165,9 +194,9 @@ const UserInput = ({ setInputData, setInputHasEntered }) => {
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
                 >
                   <option value="">Select end node</option>
-                  {nodes.map((node, idx) => (
-                    <option key={idx} value={node}>
-                      {node}
+                  {Array.from({ length: numNodes }, (_, idx) => (
+                    <option key={idx} value={`Node ${idx + 1}`}>
+                      {`Node ${idx + 1}`}
                     </option>
                   ))}
                 </select>
