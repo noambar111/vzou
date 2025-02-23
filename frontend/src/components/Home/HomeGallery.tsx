@@ -6,6 +6,8 @@ import bstGif from "../../assets/Gallery/treeGif.gif";
 import sortsGif from "../../assets/Gallery/sortsGif.gif";
 import sortsImage from "../../assets/Gallery/sortsPhoto.png";
 import RoutePaths from "../../Routes/RoutePaths";
+import dynamicGif from "../../assets/Gallery/200.gif"
+import dpImg from "../../assets/Gallery/dp.png"
 
 function HomeGallery() {
   return (
@@ -28,6 +30,12 @@ function HomeGallery() {
           image={sortsImage}
           gif={sortsGif}
           url={RoutePaths.SORTS}
+        />
+        <DsCard
+          title={"Dynamic Programming"}
+          image={dpImg}
+          gif={dynamicGif}
+          url={RoutePaths.DYNAMIC_PROG}
         />
       </div>
     </section>

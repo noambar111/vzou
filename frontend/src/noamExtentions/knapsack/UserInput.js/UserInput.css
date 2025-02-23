@@ -1,0 +1,100 @@
+.page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh; /* Full height */
+  background-color: #f4f4f4; /* Light gray background */
+  gap: 40px; /* Add spacing between form and items container */
+}
+
+.form-container {
+  background-color: #e8f5e9; /* Light green background */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add shadow for better depth */
+  text-align: center;
+  width: 400px; /* Set a consistent width */
+  height: 50vh; /* Full height */
+
+}
+
+.form-container h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2e7d32; /* Dark green for header text */
+  margin-bottom: 20px; /* Add spacing below header */
+  width: 300px; /* Set a consistent width */
+
+}
+
+.form-container label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #333; /* Neutral text color */
+}
+
+.form-container input {
+  width: 60%; /* Full-width input fields */
+  padding: 10px;
+  margin-bottom: 15px; /* Add spacing between inputs */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.form-container button {
+  background-color: #2e7d32; /* Green background */
+  color: white; /* White text */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-container button:hover {
+  background-color: #1b5e20; /* Darker green on hover */
+}
+
+.items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Spacing between item cards */
+  width: 300px; /* Same width as form */
+  max-height: 80vh; /* Limit height to 80% of viewport */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding-right: 10px; /* Add padding for scrollbar */
+}
+
+.item-card {
+  background-color: #ffffff; /* White background for items */
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  font-size: 14px;
+}
+
+.item-card h3 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #2e7d32; /* Match the header green color */
+  margin-bottom: 10px;
+}
+
+.item-card label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #555; /* Slightly lighter text for labels */
+}
+
+.item-card input {
+  width: calc(100% - 20px); /* Adjust for padding */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 10px; /* Add spacing between inputs */
+}
