@@ -1,5 +1,9 @@
+.abstract-container {
+    margin-left: 300px;
+
+    display: flex;
+}
 .visualizer-container {
-    margin: auto;
     width: 850px;
     height: 750px;
     background-color: #f4f4f4;
@@ -7,6 +11,42 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
 }
+
+
+.code-container {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: "monospace";
+    font-size: 16px;
+    text-align: left;
+    width: 100%;
+    max-width: 600px;
+    margin: 10px;
+}
+
+.code-line {
+    display: flex;
+    align-items: center;
+    padding: 2px 5px;
+    transition: background-color 0.3s;
+}
+
+
+.line-number {
+    color: #888;
+    width: 30px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.active-line {
+    color: red;
+    font-weight: bold;
+    background-color: #f8f9fa;
+}
+
 
 /* SVG Graph */
 .visualizer-container svg {
