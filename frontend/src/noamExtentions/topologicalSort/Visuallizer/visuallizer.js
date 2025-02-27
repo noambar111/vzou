@@ -3,23 +3,162 @@ import * as d3 from "d3";
 import "./visuallizer.css";
 
 const Visualizer = ({ nodes, edges }) => {
+    const [nodeIdx, setNodeIdx] = useState(0);
+    const [d_array, setDARRAY] = useState(new Array(nodes.length).fill(0));
+    const [f_array, setFARRAY] = useState(new Array(nodes.length).fill(0));
+    const [pi_array, setPIARRAY] = useState(new Array(nodes.length).fill(0));
+    const [c_array, setCARRAY] = useState(new Array(nodes.length).fill(0));
+    const [activeLine, setActiveLine] = useState({ section: "DFS", index: 0 });
+    const [visitedNodes, setVisitedNodes] = useState(new Set());
+    const [visitedEdges, setVisitedEdges] = useState(new Set());
+    const [stack, setStack] = useState([]); 
+    const [currentNode, setCurrentNode] = useState(null);
+
+    const nodeMapping = nodes.reduce((acc, node, index) => {
+        acc[node] = index + 1; 
+        return acc;
+    }, {});
+
+
+    const adjacencyList = Array(nodes.length + 1).fill(null).map(() => []);
+
+    edges.forEach(({ start, end }) => {
+    const startIndex = nodeMapping[start];
+    const endIndex = nodeMapping[end];
+
+    adjacencyList[startIndex].push(endIndex);
+    });
+
+    const nextStepp = () => {
+        console.log(nodes.length);
+        if((activeLine.index == 0) && (activeLine.section === "DFS"))
+        {
+            setActiveLine({section:"DFS", index:activeLine.index +1});
+            return;
+        }
+        if((activeLine.index == 1) && (activeLine.section === "DFS"))
+        {
+            setActiveLine({section:"DFS", index:activeLine.index +1});
+            return;
+        }
+        if((activeLine.index == 2) && (activeLine.section === "DFS"))
+        {
+            const prevD = [...d_array];
+            prevD[nodeIdx] = -1;
+            setDARRAY(prevD);
+            setActiveLine({section:"DFS", index:activeLine.index +1});
+            return;
+        }
+        if((activeLine.index == 3) && (activeLine.section === "DFS"))
+        {
+            console.log(f_array);
+
+            const prevF = [...f_array];
+            prevF[nodeIdx] = -1;
+            setFARRAY(prevF);
+            setActiveLine({section:"DFS", index:activeLine.index +1});
+            return;
+        }
+        if((activeLine.index == 4) && (activeLine.section === "DFS"))
+        {
+            const prevC = [...c_array];
+            prevC[nodeIdx] = "W";
+            setCARRAY(prevC);
+            setActiveLine({section:"DFS", index:activeLine.index +1});
+            return;
+        }
+        if((activeLine.index == 5) && (activeLine.section === "DFS"))
+        {
+            const prevPI = [...pi_array];
+            prevPI[nodeIdx] = "W";
+            setPIARRAY(prevPI);
+            if(nodeIdx < nodes.length )
+            {
+                setNodeIdx(nodeIdx + 1);
+                setActiveLine({section:"DFS", index: 1});
+            }
+            else
+            {
+                setActiveLine({section:"DFS", index:activeLine.index +1});
+            }            
+        }
+
+    }
+
+    console.log("nodes - " + nodes) ;
+    console.log("edges - " + edges);
     const svgRef = useRef();
-    const dfsPseudoCode = [
+    const dfsCode = [
         "DFS(G):",
         "    for each vertex u in G:",
+        "        d[u] = - ;",
+        "        f[u] = - ;",
+        "        c[u] = white ;",
+        "        PI[u] = NIL ;",
+        "    for each vertex u in G:",
         "        if u is not visited:",
-        "            DFS-VISIT(G, u)",
-        "",
+        "            DFS-VISIT(G, u)"
+    ];
+
+    const dfsVisitCode = [
         "DFS-VISIT(G, u):",
         "    mark u as visited",
         "    for each neighbor v of u in G:",
         "        if v is not visited:",
         "            DFS-VISIT(G, v)"
     ];
-    const [activeLine, setActiveLine] = useState(null);
+
+
+    function nextStep() {
+        setActiveLine((prev) => {
+            if (prev.section === "DFS") {
+                if (prev.index < dfsCode.length - 1) {
+                    return { section: "DFS", index: prev.index + 1 };
+                } else {
+                    return startDFS();
+                }
+            } else if (prev.section === "DFS-VISIT") {
+                if (prev.index < dfsVisitCode.length - 1) {
+                    return { section: "DFS-VISIT", index: prev.index + 1 };
+                } else {
+                    return processNextNode();
+                }
+            }
+        });
+    }
+
+    function startDFS() {
+        const unvisitedNodes = nodes.filter(n => !visitedNodes.has(n));
+        if (unvisitedNodes.length > 0) {
+            const startNode = unvisitedNodes[0]; 
+            setStack([startNode]);
+            return { section: "DFS-VISIT", index: 0 };
+        }
+        return { section: "DFS", index: 0 };
+    }
+
+    function processNextNode() {
+        if (stack.length === 0) {
+            return { section: "DFS", index: 0 }; 
+        }
+
+        const newStack = [...stack];
+        const node = newStack.pop(); 
+        setStack(newStack);
+        setVisitedNodes((prev) => new Set(prev).add(node));
+
+        const unvisitedNeighbors = edges
+            .filter(e => e.start === node && !visitedNodes.has(e.end))
+            .map(e => e.end);
+
+        newStack.push(...unvisitedNeighbors);
+        setStack(newStack);
+
+        return { section: "DFS-VISIT", index: 0 };
+    }
     function highlightLine(index) {
         setActiveLine(index);
-        setTimeout(() => setActiveLine(null), 1000); // מסיר הדגשה אחרי שנייה
+        setTimeout(() => setActiveLine(null), 1000); 
     }
 
     useEffect(() => {
@@ -180,18 +319,31 @@ const Visualizer = ({ nodes, edges }) => {
                 <svg ref={svgRef} width={800} height={700} style={{ border: "1px solid black" }}></svg>
             </div>
             <div className="code-container">
-            <pre>
-                {dfsPseudoCode.map((line, index) => (
-                    <div 
-                        key={index} 
-                        className={`code-line ${activeLine === index ? "active-line" : ""}`}
-                    >
-                        <span className="line-number">{index + 1}</span>
-                        <span>{line}</span>
-                    </div>
-                ))}
-            </pre>
-        </div>
+                <pre>
+                    {dfsCode.map((line, index) => (
+                        <div
+                            key={`DFS-${index}`}
+                            className={`code-line ${activeLine.section === "DFS" && activeLine.index === index ? "active-line" : ""}`}
+                        >
+                            <span className="line-number">{index + 1}</span>
+                            <span>{line}</span>
+                        </div>
+                    ))}
+                    <br />
+                    {dfsVisitCode.map((line, index) => (
+                        <div
+                            key={`DFS-VISIT-${index}`}
+                            className={`code-line ${activeLine.section === "DFS-VISIT" && activeLine.index === index ? "active-line" : ""}`}
+                        >
+                            <span className="line-number">{dfsCode.length + 1 + index}</span>
+                            <span>{line}</span>
+                        </div>
+                    ))}
+                </pre>
+                <button onClick={nextStepp} className="next-step-button">
+                    Next Step
+                </button>
+            </div>
         </div>
         </>
     );

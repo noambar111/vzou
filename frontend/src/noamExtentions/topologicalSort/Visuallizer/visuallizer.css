@@ -77,3 +77,21 @@
     fill: black;
     text-anchor: middle;
 }
+
+.next-step-button {
+    margin-top: 25px;
+    margin-left: 50px;
+    display: block;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.next-step-button:hover {
+    background-color: #0056b3;
+}
