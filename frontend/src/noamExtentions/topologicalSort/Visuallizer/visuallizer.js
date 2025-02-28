@@ -9,10 +9,7 @@ const Visualizer = ({ nodes, edges }) => {
     const [pi_array, setPIARRAY] = useState(new Array(nodes.length).fill(0));
     const [c_array, setCARRAY] = useState(new Array(nodes.length).fill(0));
     const [activeLine, setActiveLine] = useState({ section: "DFS", index: 0 });
-    const [visitedNodes, setVisitedNodes] = useState(new Set());
-    const [visitedEdges, setVisitedEdges] = useState(new Set());
-    const [stack, setStack] = useState([]); 
-    const [currentNode, setCurrentNode] = useState(null);
+    const [time, setTime] = useState(0);
 
     const nodeMapping = nodes.reduce((acc, node, index) => {
         acc[node] = index + 1; 
@@ -38,8 +35,16 @@ const Visualizer = ({ nodes, edges }) => {
         }
         if((activeLine.index == 1) && (activeLine.section === "DFS"))
         {
-            setActiveLine({section:"DFS", index:activeLine.index +1});
+            if( nodeIdx < nodes.length)
+            {
+                setActiveLine({section:"DFS", index:activeLine.index +1});
+            }
+            else {
+                setActiveLine({section:"DFS", index:6});
+                setNodeIdx(0);
+            }
             return;
+
         }
         if((activeLine.index == 2) && (activeLine.section === "DFS"))
         {
@@ -70,19 +75,58 @@ const Visualizer = ({ nodes, edges }) => {
         if((activeLine.index == 5) && (activeLine.section === "DFS"))
         {
             const prevPI = [...pi_array];
-            prevPI[nodeIdx] = "W";
+            prevPI[nodeIdx] = -1;
             setPIARRAY(prevPI);
-            if(nodeIdx < nodes.length )
-            {
-                setNodeIdx(nodeIdx + 1);
-                setActiveLine({section:"DFS", index: 1});
-            }
-            else
+            setNodeIdx(nodeIdx + 1);
+            setActiveLine({section:"DFS", index: 1});
+            return;
+        }
+        if((activeLine.index == 6) && (activeLine.section === "DFS"))
+        {
+            if( nodeIdx < nodes.length)
             {
                 setActiveLine({section:"DFS", index:activeLine.index +1});
-            }            
+            }
+            else {
+                setActiveLine({section:"DFS", index:0});
+            }
+            return;
         }
-
+        if((activeLine.index == 7) && (activeLine.section === "DFS"))
+        {
+            if( c_array[nodeIdx] === "W" )
+            {
+                setActiveLine({section:"DFS", index:8});
+            }
+            else {
+                setNodeIdx(nodeIdx+1);
+                setActiveLine({section:"DFS", index:6});
+            }
+            return;
+        }
+        if((activeLine.index == 8) && (activeLine.section === "DFS"))
+        {
+            setActiveLine({section:"DFS-VISIT", index:0});
+            return;
+        }
+        if((activeLine.index == 0) && (activeLine.section === "DFS-VISIT"))
+        {
+            setActiveLine({section:"DFS-VISIT", index:1});
+            return;
+        }
+        if((activeLine.index == 1) && (activeLine.section === "DFS-VISIT"))
+        {
+            setTime(time+1);
+            setActiveLine({section:"DFS-VISIT", index:2});
+            return;
+        }
+        if((activeLine.index == 2) && (activeLine.section === "DFS-VISIT"))
+        {
+            const prevD = [...d_array];
+            prevD[nodeIdx] = time;
+            setActiveLine({section:"DFS-VISIT", index:3});
+            return;
+        }
     }
 
     console.log("nodes - " + nodes) ;
@@ -96,16 +140,20 @@ const Visualizer = ({ nodes, edges }) => {
         "        c[u] = white ;",
         "        PI[u] = NIL ;",
         "    for each vertex u in G:",
-        "        if u is not visited:",
+        "        if c[u] == \"WHITE\":",
         "            DFS-VISIT(G, u)"
     ];
 
     const dfsVisitCode = [
         "DFS-VISIT(G, u):",
-        "    mark u as visited",
+        "    time = time + 1;",
+        "    d[u] = time;",
+        "    c[u] = \"GRAY\";",
         "    for each neighbor v of u in G:",
         "        if v is not visited:",
-        "            DFS-VISIT(G, v)"
+        "            DFS-VISIT(G, v)",
+        "    c[u] = \"BLACK\";",
+        "    f[u] = time;",
     ];
 
 
