@@ -12,6 +12,18 @@
     padding: 20px;
 }
 
+.code_button-wrapper {
+    flex-direction: col; 
+}
+
+.code-wrapper {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-around; 
+    gap: 10px; 
+    width: 55%;
+}
+
 
 .code-container {
     background-color: white;
@@ -94,4 +106,24 @@
 
 .next-step-button:hover {
     background-color: #0056b3;
+}
+
+.data-table {
+    background-color: white;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.data-table th, .data-table td {
+    background-color: white;
+
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+.data-table th {
+    background-color: white;
+    font-weight: bold;
 }
