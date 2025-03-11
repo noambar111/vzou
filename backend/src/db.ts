@@ -3,7 +3,7 @@ import { Sequelize } from 'sequelize'
 
 dotenv.config()
 
-
+const DB_NAME = process.env.NODE_ENV === 'dev' ?process.env.TEST_DB_NAME!: process.env.DB_NAME!
 export const sequelize = new Sequelize(
   'avds', //enter you local db name
   'postgres', // do no touch
@@ -21,3 +21,4 @@ sequelize.sync({ alter: true }).then(() => {
 }).catch((err) => {
   console.error('Error synchronizing database:', err);
 });
+
