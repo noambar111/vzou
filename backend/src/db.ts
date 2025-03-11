@@ -11,6 +11,13 @@ export const sequelize = new Sequelize(
   {
     dialect: 'postgres',
     host: 'localhost',
+    logging: false,
     port: 5432
   }
 )
+
+sequelize.sync({ alter: true }).then(() => {
+  console.log('Database synchronized successfully.');
+}).catch((err) => {
+  console.error('Error synchronizing database:', err);
+});

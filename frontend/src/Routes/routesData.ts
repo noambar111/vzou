@@ -10,6 +10,7 @@ import StackPage from "../pages/Animations/DataStructure/StackPage";
 import { BucketSortPage } from "../pages/Animations/sorts/BucketSortPage";
 import CountingSortPage from "../pages/Animations/sorts/CountingSortPage";
 import InsertionSortPage from "../pages/Animations/sorts/InsertionSortPage";
+import InsertionSortTestPage from "../noamExtentions/finalTest/insertion/InsertionSortTestPage"
 import MergeSortPage from "../pages/Animations/sorts/MergeSortPage";
 import QuickSortPage from "../pages/Animations/sorts/QuickSortPage";
 import RadixSortPage from "../pages/Animations/sorts/RadixSortPage";
@@ -39,6 +40,9 @@ import Graphs from "../components/Home/Graphs";
 import DataStructures from "../components/Home/DataStructures";
 import KruskalPage from "../pages/Animations/DataStructure/KruskalPage";
 import Sorts from "../components/Home/Sorts";
+import KnapsackManager from "../noamExtentions/knapsack/Manager";
+import TopSortManager from "../noamExtentions/topologicalSort/Manager";
+import DynamicProgramming from "../components/Home/DynamicProg";
 
 export interface RouteItem {
   path: string;
@@ -67,6 +71,7 @@ export const userRoutes: RouteItem[] = [
   { path: RoutePaths.GRAPHS, element: Graphs },
   { path: RoutePaths.DATA_STRUCTURES, element: DataStructures },
   { path: RoutePaths.SORTS, element: Sorts },
+  { path: RoutePaths.DYNAMIC_PROG, element: DynamicProgramming },
 
   // Animations
   { path: RoutePaths.STACK, element: StackPage },
@@ -77,7 +82,10 @@ export const userRoutes: RouteItem[] = [
   { path: RoutePaths.LINKED_LIST, element: LinkedListPage },
   { path: RoutePaths.HASH_TABLE, element: HashTablePage },
   { path: RoutePaths.QUICK_SORT, element: QuickSortPage },
+  { path: RoutePaths.KNAPSACK, element: KnapsackManager },
+  { path: RoutePaths.TOPSORT, element: TopSortManager },
   { path: RoutePaths.INSERTION_SORT, element: InsertionSortPage },
+  { path: RoutePaths.INSERTION_SORT_TEST, element: InsertionSortTestPage },
   { path: RoutePaths.COUNTING_SORT, element: CountingSortPage },
   { path: RoutePaths.MERGE_SORT, element: MergeSortPage },
   { path: RoutePaths.BUCKET_SORT, element: BucketSortPage },

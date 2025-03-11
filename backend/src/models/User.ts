@@ -15,6 +15,8 @@ class User extends Model<UserAttributes, IUserRegister> implements UserAttribute
   public password!: string
   public isEnabled2FA!: boolean
   public isEmailConfirmed!: boolean
+  public learningPath!: Record<string, string> | null;
+  public hasCompletedQuiz: boolean = false;
 
   // timestamps!
   public readonly createdAt!: Date
@@ -23,19 +25,27 @@ class User extends Model<UserAttributes, IUserRegister> implements UserAttribute
 
 User.init({
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  email: { type: DataTypes.STRING, unique: true, allowNull: false,validate:{isEmail:true} },
+  email: { type: DataTypes.STRING, unique: true, allowNull: false, validate: { isEmail: true } },
   firstName: { type: DataTypes.STRING, allowNull: false },
   lastName: { type: DataTypes.STRING, allowNull: false },
   password: { type: DataTypes.STRING, allowNull: false },
-  gender: { type: DataTypes.STRING, allowNull: false,defaultValue: 'Unknown' },
-  birthYear: { type: DataTypes.INTEGER, allowNull: false ,defaultValue: 2000, validate:{min:new Date().getFullYear()-120,max:new Date().getFullYear()-16}},
+  gender: { type: DataTypes.STRING, allowNull: false, defaultValue: 'Unknown' },
+  birthYear: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 2000,
+    validate: { min: new Date().getFullYear() - 120, max: new Date().getFullYear() - 16 },
+  },
   isEnabled2FA: { type: DataTypes.BOOLEAN, defaultValue: false },
   isEmailConfirmed: { type: DataTypes.BOOLEAN, defaultValue: false },
-  lastSeen: { type: DataTypes.DATE, allowNull: false  },
+  lastSeen: { type: DataTypes.DATE, allowNull: false },
   role: { type: DataTypes.STRING, defaultValue: 'Student' },
+  hasCompletedQuiz: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false }, // New field
+  learningPath: { type: DataTypes.JSONB, allowNull: true }, // New field
 }, {
   timestamps: true,
   sequelize: sequelize,
-})
+});
 
-export default User
+
+export default User;
