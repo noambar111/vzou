@@ -1,7 +1,10 @@
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
+[System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true }
+
+
 # Define the base URL and endpoints for each topic
-$baseUrl = "http://localhost:3001/api/questions/bulk-insert"
+$baseUrl = "https://ds-sce.sce-fpm.com:3001/api/questions/bulk-insert"
 $topics = @(
-    "basic-programming",
     "bubble-sort",
     "insertion-sort",
     "stack",

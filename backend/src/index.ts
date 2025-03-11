@@ -37,8 +37,8 @@ import  {
 } from './controllers/QuestionsControllers.js'
 
 // uncomment 2 next lines for production
-// import fs from 'fs'
-// import https from 'https'
+import fs from 'fs'
+import https from 'https'
 dotenv.config()
 
 // uncomment 3 next lines for production
