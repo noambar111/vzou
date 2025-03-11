@@ -22,6 +22,7 @@ export enum RoutePaths {
   GRAPHS = "/graphs",
   DATA_STRUCTURES = "/data-structures",
   SORTS = "/sorts",
+  DYNAMIC_PROG = "/dynamic_programming",
 
   // Animations
   STACK = "/stack",
@@ -32,7 +33,10 @@ export enum RoutePaths {
   LINKED_LIST = "/linkedlist",
   HASH_TABLE = "/hashtable",
   QUICK_SORT = "/quicksort",
+  KNAPSACK = '/knapsack',
+  TOPSORT = '/top-sort',
   INSERTION_SORT = "/insertionsort",
+  INSERTION_SORT_TEST = "/quiz/insertion-sort-test",
   COUNTING_SORT = "/countingsort",
   MERGE_SORT = "/mergesort",
   BUCKET_SORT = "/bucketsort",

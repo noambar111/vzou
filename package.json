@@ -3,6 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "back": "cd backend && npm run dev",
+    "back2": "cd backend && npm run dev2",
+    "front": "cd frontend && npm run start"
+  },
+  "dependencies": {
+    "axios": "^1.7.9"
     "backend": "cd backend && yarn start",
     "frontend-build": "cd frontend && npm run build",
     "frontend-start": "cd frontend && npm run release"

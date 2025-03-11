@@ -1,0 +1,114 @@
+.home-page-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.content-row {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  gap: 40px; /* Space between buttons and cards */
+  margin-top: 20px;
+  flex-wrap: wrap; /* Ensures responsiveness on smaller screens */
+}
+
+.button-container {
+  margin-top: 170px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between buttons */
+}
+
+.green-button,
+.red-button {
+  padding: 15px 30px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 150px; /* Consistent button size */
+  text-align: center;
+}
+
+.green-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.green-button:hover {
+  background-color: #45a049;
+}
+
+.red-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.red-button:hover {
+  background-color: #e53935;
+}
+
+.info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px;
+  text-align: left;
+}
+
+.info-section h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.info-card {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  border-left: 5px solid transparent;
+}
+
+.info-card.custom-web {
+  background-color: #ffebee; /* Light red */
+  border-left-color: #f44336; /* Red border */
+}
+
+.info-card.home-gallery {
+  background-color: #e8f5e9; /* Light green */
+  border-left-color: #4caf50; /* Green border */
+}
+
+.info-card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Subtle hover effect */
+}
+
+.info-section h2 {
+  text-align: center;
+  font-size: 32px; /* Larger font size */
+  font-weight: bold; /* Bold text for emphasis */
+  color: #4caf50; /* Match the green theme of the page */
+  margin-bottom: 30px; /* Add extra spacing below */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  display: inline-block; /* Ensures the border doesn't stretch across */
+  padding-bottom: 5px; /* Adds spacing between text and underline */
+}
+
+.info-section h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.info-section p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333; /* Slightly darker text for better readability */
+}

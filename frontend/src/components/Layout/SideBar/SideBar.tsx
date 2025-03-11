@@ -4,6 +4,7 @@ import { useState } from "react";
 import { elements } from "chart.js";
 import DataStructureElements from "./DataStructureElements";
 import GraphElements from "./GraphElements";
+import DynamicProgrammingElements from "./DPelements";
 
 const SideBar = () => {
   const [show, setShow] = useState(true);
@@ -30,6 +31,8 @@ const SideBar = () => {
             <SortElements title={"Sorts"} />
             <DataStructureElements title={"Data Structures"} />
             <GraphElements title={"Graphs"} />
+            <DynamicProgrammingElements title={"Dynamic Programming"} />
+
           </>
         )}
         {!show && (

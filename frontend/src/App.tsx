@@ -1,10 +1,9 @@
 import "./App.css";
-
 import { CircularProgress } from "@mui/material";
-
 import Header from "./components/Layout/Header/Header";
 import AppRouter from "./Routes/AppRouter";
 import { useAuthMeQuery } from "./store/reducers/auth-reducer-api";
+import { HomePageProvider } from "./noamExtentions/HomePageContext";
 
 
 function App() {
@@ -25,10 +24,12 @@ function App() {
           <b className="text-2xl text-lime-600">App is Loading ...</b>
         </div>
       ) : (
+        <HomePageProvider>
         <div className="App">
           <Header />
           <AppRouter />
         </div>
+        </HomePageProvider>
       )}
     </>
   );
