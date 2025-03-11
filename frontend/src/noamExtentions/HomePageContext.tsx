@@ -1,15 +1,14 @@
 import React, { createContext, useContext, useState } from "react";
 
 type HomePageContextType = {
-  showHomeGallery: boolean | null;
-  setShowHomeGallery: React.Dispatch<React.SetStateAction<boolean | null>>;
+  showHomeGallery: boolean | "pilotSection" | null;
+  setShowHomeGallery: React.Dispatch<React.SetStateAction<boolean | "pilotSection" | null>>;
 };
 
 const HomePageContext = createContext<HomePageContextType | undefined>(undefined);
 
 export const HomePageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [showHomeGallery, setShowHomeGallery] = useState<boolean | null>(null);
-
+  const [showHomeGallery, setShowHomeGallery] = useState<boolean | "pilotSection" | null>(null);
   return (
     <HomePageContext.Provider value={{ showHomeGallery, setShowHomeGallery }}>
       {children}

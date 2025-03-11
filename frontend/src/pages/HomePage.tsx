@@ -6,6 +6,7 @@ import { useHomePageContext } from "../noamExtentions/HomePageContext";
 import { useAppSelector } from "../store/hooks";
 import { selectAuthentication } from "../store/reducers/auth-reducer";
 import { useHistory } from "react-router-dom";
+import PilotSecionComponent from "../noamExtentions/pilot/PilotSectionComponent/PilotSectionComponent";
 import "./HomePage.css";
 
 function HomePage() {
@@ -17,11 +18,11 @@ function HomePage() {
     setShowHomeGallery(null);
   }, [setShowHomeGallery]);
 
-  const handleSelection = (isHomeGallery: boolean) => {
-    if (!isHomeGallery && !authSlice.isLoggedIn) {
+  const handleSelection = (selection: boolean | "pilotSection") => {
+    if (selection !== true && !authSlice.isLoggedIn) {
       history.push("/login");
     } else {
-      setShowHomeGallery(isHomeGallery);
+      setShowHomeGallery(selection);
     }
   };
 
@@ -32,6 +33,9 @@ function HomePage() {
         <div className="content-row">
           {/* Buttons for selecting the view */}
           <div className="button-container">
+          <button onClick={() => handleSelection("pilotSection")} className="blue-button">
+              Pilot Section
+          </button>
           <button onClick={() => handleSelection(false)} className="red-button">
               Custom Web
             </button>
@@ -60,13 +64,14 @@ function HomePage() {
   
       {/* Main content area */}
       <FloatUpContainer>
-        {showHomeGallery === null ? null : showHomeGallery ? (
-          <HomeGallery />
-        ) : authSlice.isLoggedIn ? (
-          <CustomizedPage />
-        ) : (
-          <div className="redirect-message">Redirecting to login...</div>
-        )}
+        {showHomeGallery === null ? null : 
+            showHomeGallery === true ? (
+              <HomeGallery />
+            ) : showHomeGallery === false ? (
+              authSlice.isLoggedIn ? <CustomizedPage /> : <div className="redirect-message">Redirecting to login...</div>
+            ) : showHomeGallery === "pilotSection" ? (
+              authSlice.isLoggedIn ? <PilotSecionComponent /> : <div className="redirect-message">Redirecting to login...</div>
+            ) : null}
       </FloatUpContainer>
     </div>
   );
