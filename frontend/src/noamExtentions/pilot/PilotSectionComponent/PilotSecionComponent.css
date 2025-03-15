@@ -20,24 +20,24 @@
 
 
 .group2-button {
-    background-color: #007bff;
+    background-color: #ab6be3;
     color: white;
 }
 
 .group2-button:hover {
-    background-color: #0056b3;
+    background-color: #de3cc8;
     transform: translateY(-3px);
     box-shadow: 0px 5px 15px rgba(0, 123, 255, 0.3);
 }
 
 
 .group3-button {
-    background-color: #28a745;
+    background-color: #4179e2;
     color: white;
 }
 
 .group3-button:hover {
-    background-color: #1e7e34;
+    background-color: #43d4e8;
     transform: translateY(-3px);
     box-shadow: 0px 5px 15px rgba(40, 167, 69, 0.3);
 }
@@ -45,8 +45,30 @@
 
 h2 {
     text-align: center;
-    font-size: 26px;
-    color: #333;
+    font-size: 36px; 
+    font-weight: bold;
+    color: #6cc25c; 
     margin-bottom: 20px;
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif; 
+    position: relative;
+    display: inline-block;
+    padding-bottom: 8px;
+}
+
+h2::after {
+    content: "";
+    width: 60%;
+    height: 4px;
+    background: linear-gradient(90deg, #007bff, #28a745);
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+h2:hover::after {
+    opacity: 1;
 }
