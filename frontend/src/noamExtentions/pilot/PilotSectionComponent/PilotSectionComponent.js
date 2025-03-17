@@ -1,7 +1,7 @@
 import './PilotSecionComponent.css';
 import { useState } from 'react';
 import Group2Component from '../Group2/Group2Component';
-import Group3Component from '../Group3/Group3Component';
+import Group3Component from '../Group3/Group3CustomizedPage/CustomizedPilotPage';
 
 const PilotSecionComponent = () => {
     const [groupIdx, setGroupIdx] = useState(0);

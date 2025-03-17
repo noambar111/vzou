@@ -1,0 +1,38 @@
+[
+    {
+        "id": 6,
+        "topic": "Counting Sort",
+        "difficulty": "Memory",
+        "question": "What is a unique feature of Counting Sort?",
+        "options": ["It uses a counting array", "It is recursive", "It works with floating point numbers","I prefer to skip this topic."],
+        "correctAnswer": "It uses a counting array"
+    },
+    {
+        "id": 6,
+        "topic": "Counting Sort",
+        "difficulty": "Application",
+        "question": "Using Counting Sort, sort [4, 2, 2, 1]. What is the sorted array?",
+        "options": ["[1, 2, 2, 4]", "[4, 2, 1, 2]", "[2, 1, 4, 2]","I prefer to skip this question."],
+        "correctAnswer": "[1, 2, 2, 4]"
+    },
+    {
+        "id": 7,
+        "topic": "Radix Sort",
+        "difficulty": "Memory",
+        "question": "What type of data is Radix Sort typically used for?",
+        "options": ["Floating-point numbers", "Strings and integers", "Unsorted arrays","I prefer to skip this topic."],
+        "correctAnswer": "Strings and integers"
+    },
+    {
+        "id": 7,
+        "topic": "Radix Sort",
+        "difficulty": "Application",
+        "question": "Using Radix Sort, sort the numbers [170, 45, 75, 90]. What is the sorted array?",
+        "options": ["[45, 75, 90, 170]", "[170, 45, 75, 90]", "[75, 45, 90, 170]","I prefer to skip this question."],
+        "correctAnswer": "[45, 75, 90, 170]"
+    }
+]
+
+
+
+

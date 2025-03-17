@@ -11,7 +11,6 @@ import { BucketSortPage } from "../pages/Animations/sorts/BucketSortPage";
 import CountingSortPage from "../pages/Animations/sorts/CountingSortPage";
 import PilotCountingSortPage from "../pages/Animations/sorts/CountingSortPagePilot";
 import InsertionSortPage from "../pages/Animations/sorts/InsertionSortPage";
-import InsertionSortTestPage from "../noamExtentions/finalTest/insertion/InsertionSortTestPage"
 import MergeSortPage from "../pages/Animations/sorts/MergeSortPage";
 import QuickSortPage from "../pages/Animations/sorts/QuickSortPage";
 import RadixSortPage from "../pages/Animations/sorts/RadixSortPage";
@@ -87,7 +86,6 @@ export const userRoutes: RouteItem[] = [
   { path: RoutePaths.KNAPSACK, element: KnapsackManager },
   { path: RoutePaths.TOPSORT, element: TopSortManager },
   { path: RoutePaths.INSERTION_SORT, element: InsertionSortPage },
-  { path: RoutePaths.INSERTION_SORT_TEST, element: InsertionSortTestPage },
   { path: RoutePaths.COUNTING_SORT_PILOT, element: PilotCountingSortPage },
   { path: RoutePaths.COUNTING_SORT, element: CountingSortPage },
   { path: RoutePaths.MERGE_SORT, element: MergeSortPage },
