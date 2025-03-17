@@ -9,11 +9,13 @@ import QueuePage from "../pages/Animations/DataStructure/QueuePage";
 import StackPage from "../pages/Animations/DataStructure/StackPage";
 import { BucketSortPage } from "../pages/Animations/sorts/BucketSortPage";
 import CountingSortPage from "../pages/Animations/sorts/CountingSortPage";
+import PilotCountingSortPage from "../pages/Animations/sorts/CountingSortPagePilot";
 import InsertionSortPage from "../pages/Animations/sorts/InsertionSortPage";
 import InsertionSortTestPage from "../noamExtentions/finalTest/insertion/InsertionSortTestPage"
 import MergeSortPage from "../pages/Animations/sorts/MergeSortPage";
 import QuickSortPage from "../pages/Animations/sorts/QuickSortPage";
 import RadixSortPage from "../pages/Animations/sorts/RadixSortPage";
+import PilotRadixSortPage from "../pages/Animations/sorts/RadixSortPagePilot";
 import ChangePassword from "../pages/ChangePassword";
 import EditProfilePage from "../pages/EditProfilePage";
 import EmailVerificationPage from "../pages/EmailVerificationPage";
@@ -86,10 +88,12 @@ export const userRoutes: RouteItem[] = [
   { path: RoutePaths.TOPSORT, element: TopSortManager },
   { path: RoutePaths.INSERTION_SORT, element: InsertionSortPage },
   { path: RoutePaths.INSERTION_SORT_TEST, element: InsertionSortTestPage },
+  { path: RoutePaths.COUNTING_SORT_PILOT, element: PilotCountingSortPage },
   { path: RoutePaths.COUNTING_SORT, element: CountingSortPage },
   { path: RoutePaths.MERGE_SORT, element: MergeSortPage },
   { path: RoutePaths.BUCKET_SORT, element: BucketSortPage },
   { path: RoutePaths.RADIX_SORT, element: RadixSortPage },
+  { path: RoutePaths.RADIX_SORT_PILOT, element: PilotRadixSortPage },
   { path: RoutePaths.BFS, element: BfsPage },
   { path: RoutePaths.DJIKSTRA, element: DjikstraPage },
   { path: RoutePaths.DFS, element: DFSPage },

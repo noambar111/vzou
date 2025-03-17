@@ -135,6 +135,13 @@ const HomePageData = [
     type: "Sort",
   },
   {
+    title: "Counting Sort",
+    gif: countingSortGif,
+    image: countingSortImg,
+    url: RoutePaths.COUNTING_SORT_PILOT,
+    type: "Sort_p",
+  },
+  {
     title: "Bucket Sort",
     gif: bucketSortGif,
     image: bucketSortImg,
@@ -161,6 +168,13 @@ const HomePageData = [
     image: radixSortImg,
     url: RoutePaths.RADIX_SORT,
     type: "Sort",
+  },
+  {
+    title: "Radix Sort",
+    gif: radixSortGif,
+    image: radixSortImg,
+    url: RoutePaths.RADIX_SORT_PILOT,
+    type: "Sort_p",
   },
   {
     title: "BFS",

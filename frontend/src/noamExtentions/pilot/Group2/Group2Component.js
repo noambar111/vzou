@@ -1,11 +1,12 @@
-import DsCard from "../../../components/Home/DsCard";
+import DsCard from "../../../components/Home/DsCardForPilot";
 import HomePageData from "../../../components/Home/HomePageData";
 import FloatUpContainer from "../../../components/UI/FloatUpContainer";
 
 const Group2Component = () => {
 
     const filteredSorts = HomePageData.filter(element =>
-    element.title === "Radix Sort" || element.title === "Counting Sort");
+    element.type === "Sort_p" );
+    console.log(filteredSorts);
     return (
         <>
         <br />

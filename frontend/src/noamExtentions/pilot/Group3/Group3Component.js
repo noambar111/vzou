@@ -6,8 +6,8 @@ import FinalExam from "../../finalExam/finalExam";
 // import "./LearningPath.css";
 
 const questionTopics = [
-    { topicId: 6, clusterId: 0, name: "Counting Sort", demoLink: "/countingsort", cx: 360, cy: 135, fill: "#4CAF50", status: "unknown" },
-    { topicId: 7, clusterId: 0, name: "Radix Sort", demoLink: "/radixsort", cx: 560, cy: 180, fill: "#FFC107", status: "unknown" }
+    { topicId: 6, clusterId: 0, name: "Counting Sort", demoLink: "/countingsort_p", cx: 360, cy: 135, fill: "#4CAF50", status: "unknown" },
+    { topicId: 7, clusterId: 0, name: "Radix Sort", demoLink: "/radixsort_p", cx: 560, cy: 180, fill: "#FFC107", status: "unknown" }
 ];
 
 const topicMap = {
