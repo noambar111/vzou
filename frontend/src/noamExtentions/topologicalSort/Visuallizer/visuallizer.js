@@ -4,6 +4,7 @@ import "./visuallizer.css";
 
 const Visualizer = ({ nodes, edges }) => {
 
+    const [showTopo, setShowTopo] = useState(false);
     const [fromhDfsV, setFromhDfsV] = useState(0);
     const [finishDFS, setFinishDfs] = useState(0);
     const [finishDFSVISIT, setFinishDfsVISIT] = useState(0);
@@ -17,6 +18,12 @@ const Visualizer = ({ nodes, edges }) => {
     const [activeLine, setActiveLine] = useState({ section: "DFS", index: 0 });
     const [time, setTime] = useState(0);
     const [stack, setStack] = useState([]);
+    const dynamicWidth = Math.max(800, nodes.length * 150);
+
+
+    const handleTopologicalSort = () => {
+        setShowTopo(true);
+    };
 
     const push = (nodeIdx, neighborNodeIdx) => {
         setStack(prevStack => [...prevStack, { nodeIdx, neighborNodeIdx }]);
@@ -365,6 +372,92 @@ const Visualizer = ({ nodes, edges }) => {
         const svg = d3.select(svgRef.current);
         svg.selectAll("*").remove();
 
+        if (showTopo) {
+            const defs = svg.append("defs");
+            defs.append("marker")
+                .attr("id", "arrowhead")
+                .attr("viewBox", "0 -5 10 10")
+                .attr("refX", 18)
+                .attr("refY", 0)
+                .attr("markerWidth", 6)
+                .attr("markerHeight", 6)
+                .attr("orient", "auto")
+                .append("path")
+                .attr("d", "M0,-5L10,0L0,5")
+                .attr("fill", "#4A90E2");
+        
+            const sortedNodes = [...nodes]
+                .map((_, idx) => ({ id: idx + 1, f: f_array[idx] }))
+                .sort((a, b) => b.f - a.f);
+        
+            const spacing = 120;
+            const formattedNodes = sortedNodes.map((n, index) => ({
+                id: n.id,
+                x: 80 + index * spacing,
+                y: 100,
+                t: n.id
+            }));
+        
+            const nodeIdToPosition = {};
+            formattedNodes.forEach(n => {
+                nodeIdToPosition[n.id] = n;
+            });
+        
+            const formattedEdges = edges
+                .map(({ start, end }) => {
+                    const sourceIdx = nodeMapping[start];
+                    const targetIdx = nodeMapping[end];
+                    const source = nodeIdToPosition[sourceIdx];
+                    const target = nodeIdToPosition[targetIdx];
+                    if (!source || !target) return null;
+                    return { source, target };
+                })
+                .filter(edge => edge !== null);
+        
+            // 🎯 ציור קשתות מעוגלות בין קודקודים
+            svg.selectAll(".edge")
+                .data(formattedEdges)
+                .enter()
+                .append("path")
+                .attr("d", d => {
+                    const x1 = d.source.x;
+                    const y1 = d.source.y;
+                    const x2 = d.target.x;
+                    const y2 = d.target.y;
+                    const mx = (x1 + x2) / 2;
+                    const curveOffset = 40; // שינוי עקומה
+                    return `M ${x1},${y1} Q ${mx},${y1 - curveOffset} ${x2},${y2}`;
+                })
+                .attr("stroke", "#4A90E2")
+                .attr("stroke-width", "4")
+                .attr("fill", "none")
+                .attr("marker-end", "url(#arrowhead)");
+        
+            svg.selectAll(".node")
+                .data(formattedNodes)
+                .enter()
+                .append("circle")
+                .attr("cx", d => d.x)
+                .attr("cy", d => d.y)
+                .attr("r", 20)
+                .attr("fill", "green")
+                .attr("stroke", "black")
+                .attr("stroke-width", 2);
+        
+            svg.selectAll(".node-label")
+                .data(formattedNodes)
+                .enter()
+                .append("text")
+                .attr("x", d => d.x)
+                .attr("y", d => d.y + 5)
+                .attr("text-anchor", "middle")
+                .attr("font-size", "14px")
+                .attr("fill", "white")
+                .text(d => "N" + d.t);
+        
+            return;
+        }
+
         const defs = svg.append("defs");
         defs.append("marker")
             .attr("id", "arrowhead")
@@ -505,13 +598,21 @@ const Visualizer = ({ nodes, edges }) => {
             .attr("fill", "white")
             .text((d) => "N" + d.t);
 
-    }, [nodes, edges]);
+        }, [nodes, edges, showTopo]);
+        console.log(dynamicWidth);
 
     return (
         <>
         <div className="abstract-container">
             <div className="visualizer-container">
-                <svg ref={svgRef} width={800} height={700} style={{ border: "1px solid black" }}></svg>
+                <div style={{ minWidth: dynamicWidth }}>
+                <svg
+                    ref={svgRef}
+                    width={dynamicWidth}
+                    height={700}
+                    style={{ border: "1px solid black" }}
+                ></svg>
+                </div>
             </div>
             <div className=".code_button-wrapper">
                 <div className="code-wrapper">
@@ -542,16 +643,28 @@ const Visualizer = ({ nodes, edges }) => {
                         </pre> 
                     </div> 
                 </div>
-                    <div className="step-control">
-                        <button onClick={nextStepp} className="next-step-button">
-                            Next Step
-                        </button>               
-                        <div
-                        className={`current-node-display`}
-                        >
-                        Current Node: {nodeIdx === -14 ? "None" : nodeIdx + 1}
+                <div className="step-control">
+                {nodeIdx === -14 ? (
+                        showTopo ? (
+                            <button onClick={() => setShowTopo(false)} className="next-step-button">
+                                Back to DFS Graph
+                            </button>
+                        ) : (
+                            <button onClick={handleTopologicalSort} className="next-step-button">
+                                Show Topological Sort
+                            </button>
+                        )
+                    ) : (
+                        <>
+                            <button onClick={nextStepp} className="next-step-button">
+                                Next Step
+                            </button>
+                            <div className={`current-node-display`}>
+                                Current Node: {nodeIdx === -14 ? "None" : nodeIdx + 1}
+                            </div>
+                        </>
+                    )}
                 </div>
-                 </div>
               
                 <table className="data-table">
                     <thead>
