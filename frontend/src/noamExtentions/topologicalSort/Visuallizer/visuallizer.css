@@ -127,3 +127,18 @@
     background-color: white;
     font-weight: bold;
 }
+
+.step-control {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.current-node-display {
+    font-weight: bold;
+    font-size: 16px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
