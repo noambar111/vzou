@@ -23,7 +23,11 @@ const Visualizer = ({ nodes, edges }) => {
     };
     
     const pop = () => {
+        if (stack.length === 0) return undefined;
+    
+        const last = stack[stack.length - 1];
         setStack(prevStack => prevStack.slice(0, -1));
+        return last;
     };
     
     const peek = () => {
@@ -63,6 +67,7 @@ const Visualizer = ({ nodes, edges }) => {
             else
             {
                 alert("finish  running the algorithm.");
+                setNodeIdx(-14);
             }
             return;
         }
@@ -158,11 +163,6 @@ const Visualizer = ({ nodes, edges }) => {
         }
         if((activeLine.index == 1) && (activeLine.section === "DFS-VISIT"))
         {
-            console.log("--------------line 1----------------");
-            console.log("nodesId:  " + nodesId);
-            console.log("currentNodeIndex:  " + nodeIdx);
-            console.log("neighborNodeIdx:  " + neighborNodeIdx);
-            console.log("--------------line 1----------------");
             setTime(time+1);
             setActiveLine({section:"DFS-VISIT", index:2});
             return;
@@ -187,8 +187,10 @@ const Visualizer = ({ nodes, edges }) => {
         if((activeLine.index == 4) && (activeLine.section === "DFS-VISIT"))
         {
             const currentNodeId = nodesId[nodeIdx];
-            console.log("neighborNodeIdx before loop:  " + neighborNodeIdx);
-            console.log("adjacencyList[currentNodeId]:  " + adjacencyList[currentNodeId]);     
+            console.log("adjacencyList:  " + adjacencyList[currentNodeId]);
+            console.log("node id:  " + currentNodeId);
+            console.log("neighbor id: " + adjacencyList[currentNodeId][neighborNodeIdx]);
+
             if(neighborNodeIdx < adjacencyList[currentNodeId].length)
             {
                 setActiveLine({section:"DFS-VISIT", index:5});
@@ -219,12 +221,20 @@ const Visualizer = ({ nodes, edges }) => {
         if((activeLine.index == 6) && (activeLine.section === "DFS-VISIT"))
         {
             const prevpi = [...pi_array];
-            prevpi[neighborNodeIdx] = nodeIdx;
+            prevpi[adjacencyList[nodeIdx+1][neighborNodeIdx] - 1 ] = nodeIdx + 1;
             setPIARRAY(prevpi);
             setActiveLine({section:"DFS-VISIT", index:7});
             return;
         }
         if ((activeLine.index == 7) && (activeLine.section === "DFS-VISIT")) {
+            if(fromhDfsV === 1)
+            {
+                console.log("fromhDfsV === 1");
+                setFromhDfsV(0);
+                setNeighborNodeIdx(neighborNodeIdx+1);
+                setActiveLine({section:"DFS-VISIT", index:4});
+                return;
+            }
             console.log("--------------line 7----------------");
             console.log("nodesId:  " + nodesId);
             console.log("currentNodeIndex:  " + nodeIdx);
@@ -258,25 +268,24 @@ const Visualizer = ({ nodes, edges }) => {
         }
         if((activeLine.index == 10) && (activeLine.section === "DFS-VISIT"))
         {
+            console.log("stack: ", JSON.stringify(stack, null, 2));
             const prevF = [...f_array];
             prevF[nodeIdx] = time;
             setFARRAY(prevF);
-            if(isEmpty())
-            {
+            const popped = pop();
+            console.log("popped: ", popped);
+            if (!popped) {
                 setFinishDfsVISIT(1);
-                setActiveLine({section:"DFS", index:8});
+                setActiveLine({ section: "DFS", index: 8 });
                 setFromhDfsV(2);
-                console.log("finish")
-            }
-            else
-            {
-                setFinishDfsVISIT(0);
-                const { nodeIdx: nidx, neighborNodeIdx: nnidx } = pop();
+                console.log("finish");
+            } else {
+                const { nodeIdx: nidx, neighborNodeIdx: nnidx } = popped;
                 setNeighborNodeIdx(nnidx);
                 setNodeIdx(nidx);
+                setFinishDfsVISIT(0);
                 setFromhDfsV(1);
-                setActiveLine({section:"DFS-VISIT", index:7});
-
+                setActiveLine({ section: "DFS-VISIT", index: 7 });
             }
 
             return;
@@ -540,8 +549,8 @@ const Visualizer = ({ nodes, edges }) => {
                         <div
                         className={`current-node-display`}
                         >
-                        🔵 Current Node: {nodeIdx +1 || "None"}
-                    </div>
+                        Current Node: {nodeIdx === -14 ? "None" : nodeIdx + 1}
+                </div>
                  </div>
               
                 <table className="data-table">

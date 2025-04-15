@@ -131,11 +131,12 @@
 .step-control {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-top: 20px;
+    gap: 18px;
+    margin-top: -10px;
 }
 
 .current-node-display {
+    margin-top: 20px;
     font-weight: bold;
     font-size: 16px;
     padding: 6px 12px;
