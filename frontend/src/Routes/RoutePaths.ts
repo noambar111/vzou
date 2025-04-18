@@ -34,6 +34,7 @@ export enum RoutePaths {
   HASH_TABLE = "/hashtable",
   QUICK_SORT = "/quicksort",
   KNAPSACK = '/knapsack',
+  LCS = '/lcs',
   TOPSORT = '/top-sort',
   INSERTION_SORT = "/insertionsort",
   INSERTION_SORT_TEST = "/quiz/insertion-sort-test",

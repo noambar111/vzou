@@ -1,0 +1,162 @@
+    .lcs-card {
+    margin-top: 30px;
+    margin-left: 500px;
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    width: 100%;
+  }
+
+  .lcs-columns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .lcs-left-column {
+    flex: 1;
+    min-width: 280px;
+    max-width: 500px;
+  }
+  
+  .lcs-right-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+ 
+  .lcs-pseudocode {
+    background-color: #f1f8e9;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .lcs-code-block {
+    background-color: #e8f5e9;
+    padding: 16px;
+    border-radius: 6px;
+    font-family: "Courier New", monospace;
+    font-size: 18px;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    text-align: left;
+  }
+  
+  .highlight-line {
+    background-color: #c5e1a5;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+
+
+  .lcs-table-scroll-wrapper {
+    max-height: 400px;
+    max-width: 600px;
+    overflow: auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 24px;
+  }
+  
+  .lcs-dp-table {
+    width: max-content;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+  
+  .lcs-dp-table th,
+  .lcs-dp-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    min-width: 40px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  
+  .cell-diagonal {
+    background-color: #c8e6c9;
+  }
+  
+  .cell-up {
+    background-color: #fff9c4;
+  }
+  
+  .cell-left {
+    background-color: #ffe0b2;
+  }
+  
+  .active-cell {
+    outline: 3px solid #2e7d32;
+    font-weight: bold;
+  }
+  
+
+  .debug-pannel {
+    gap: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+  }
+  .lcs-variable-box {
+    flex: 1;
+    margin-top: 30px;
+    background-color: #e3f2fd;
+    padding: 20px 24px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 320px;
+    font-family: 'Courier New', monospace;
+    font-size: 20px;
+    color: #212121;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    text-align: left;
+    border-left: 6px solid #2196f3;
+  }
+  
+  .vars-title {
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 14px;
+    text-align: left;
+    color: #0d47a1;
+    text-transform: uppercase;
+  }
+  
+  .vars-line {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #df1235;
+
+  }
+  
+  .vars-label {
+    font-weight: 900;
+    font-weight: bold;
+    color: #000000;
+    margin-right: 8px;
+  }
+
+  .lcs-button-container {
+    margin-top: 16px;
+  }
+  
+  .lcs-next-button {
+    margin-top: 15px;
+    background-color: #2e7d32;
+    color: white;
+    font-weight: bold;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .lcs-next-button:hover {
+    background-color: #1b5e20;
+  }

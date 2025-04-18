@@ -44,6 +44,7 @@ import Sorts from "../components/Home/Sorts";
 import KnapsackManager from "../noamExtentions/knapsack/Manager";
 import TopSortManager from "../noamExtentions/topologicalSort/Manager";
 import DynamicProgramming from "../components/Home/DynamicProg";
+import LCSManager from "../noamExtentions/LCS/Manager";
 
 export interface RouteItem {
   path: string;
@@ -84,6 +85,7 @@ export const userRoutes: RouteItem[] = [
   { path: RoutePaths.HASH_TABLE, element: HashTablePage },
   { path: RoutePaths.QUICK_SORT, element: QuickSortPage },
   { path: RoutePaths.KNAPSACK, element: KnapsackManager },
+  { path: RoutePaths.LCS, element: LCSManager },
   { path: RoutePaths.TOPSORT, element: TopSortManager },
   { path: RoutePaths.INSERTION_SORT, element: InsertionSortPage },
   { path: RoutePaths.COUNTING_SORT_PILOT, element: PilotCountingSortPage },

@@ -192,7 +192,8 @@ const HomePageData = [
   },
   { title: "Topological Sort", gif:tsortGif,     image: tsortImg, url: "/top-sort", type: "Graph" },
 
-  { title: "Knapsack Problem", gif:KnapsackGif,     image: KnapsackImg, url: "/knapsack", type: "Dynamic Programming" },
+  { title: "Knapsack Problem", gif:KnapsackGif,     image: KnapsackImg, url: "/knapsack", type: "DynamicProgramming" },
+  { title: "Longest Common Subsequence", gif:KnapsackGif,     image: KnapsackImg, url: "/lcs", type: "DynamicProgramming" },
 
 ];
 
