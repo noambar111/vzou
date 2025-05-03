@@ -23,11 +23,11 @@ const questionTopics = [
     { topicId: 13, clusterId: 2 ,name: "BFS", demoLink: "/bfs", cx: 710, cy: 375, fill: "#4CAF50", status: "unknown" },
     { topicId: 18, clusterId: 2 ,name: "Dijkstra's Algorithm", demoLink: "/djikstra", cx: 830, cy: 430, fill: "#4CAF50", status: "unknown" },
     { topicId: 22, clusterId: 3 ,name: "Knapsack", demoLink: "/knapsack", cx: 890, cy: 570, fill: "#4CAF50", status: "unknown" },
-    { topicId: 23, clusterId: 3 ,name: "LCS", demoLink: "/", cx: 890, cy: 670, fill: "#4CAF50", status: "unknown" },
+    { topicId: 23, clusterId: 3 ,name: "LCS", demoLink: "/lcs", cx: 890, cy: 670, fill: "#4CAF50", status: "unknown" },
     { topicId: 12, clusterId: 1 ,name: "Hash Table", demoLink: "/hashtable", cx: 300, cy: 500, fill: "#4CAF50", status: "unknown" },
     { topicId: 3, clusterId: 1,name: "Stack", demoLink: "/stack", cx: 250, cy: 630, fill: "#4CAF50", status: "unknown" },
     { topicId: 14, clusterId: 2 ,name: "DFS", demoLink: "/dfs", cx: 370, cy: 700, fill: "#4CAF50", status: "unknown" },
-    { topicId: 16, clusterId: 2 ,name: "Topological Sort", demoLink: "/", cx: 500, cy: 750, fill: "#4CAF50", status: "unknown" },
+    { topicId: 16, clusterId: 2 ,name: "Topological Sort", demoLink: "/top-sort", cx: 500, cy: 750, fill: "#4CAF50", status: "unknown" },
     { topicId: 19, clusterId: 2 ,name: "Bellman-Ford", demoLink: "/bellman-ford", cx: 890, cy: 370, fill: "#4CAF50", status: "unknown" },
     { topicId: 20, clusterId: 2 ,name: "Kruskal's Algorithm", demoLink: "/kruskal", cx: 850, cy: 230, fill: "#4CAF50", status: "unknown" },
 ];

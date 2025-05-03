@@ -37,6 +37,8 @@ import kruskalGif from "../../assets/Gallery/kruskalGif.gif";
 import primImg from "../../assets/Gallery/primImg.png";
 import primGif from "../../assets/Gallery/primGif.gif";
 import KnapsackGif from "../../assets/knapgif.gif";
+import LcsGif from "../../assets/Gallery/lcs.gif";
+import LcsImg from "../../assets/Gallery/lcsImg.png";
 import tsortGif from "../../assets/Gallery/tsort.gif"
 import tsortImg from "../../assets/Gallery/tsort.png"
 import KnapsackImg from "../../assets/Gallery/knapsack.png";
@@ -193,7 +195,7 @@ const HomePageData = [
   { title: "Topological Sort", gif:tsortGif,     image: tsortImg, url: "/top-sort", type: "Graph" },
 
   { title: "Knapsack Problem", gif:KnapsackGif,     image: KnapsackImg, url: "/knapsack", type: "DynamicProgramming" },
-  { title: "Longest Common Subsequence", gif:KnapsackGif,     image: KnapsackImg, url: "/lcs", type: "DynamicProgramming" },
+  { title: "Longest Common Subsequence", gif:LcsGif,     image: LcsImg, url: "/lcs", type: "DynamicProgramming" },
 
 ];
 
